@@ -1,4 +1,4 @@
-package com.yummy.module;
+package com.yummy.pojo;
 /*
  * author: SJZ
  * date: 2019/2/17
@@ -7,8 +7,7 @@ package com.yummy.module;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table
-public class ManagerBean {
+
+public class Manager {
 
 }

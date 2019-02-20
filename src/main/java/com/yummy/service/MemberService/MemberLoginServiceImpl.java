@@ -4,7 +4,7 @@ package com.yummy.service.MemberService;
  * date: 2019/2/18
  */
 
-import com.yummy.module.MemberBean;
+import com.yummy.pojo.Member;
 import com.yummy.util.message.LoginMessage;
 import com.yummy.util.message.SignupMessage;
 import org.springframework.stereotype.Service;
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberLoginServiceImpl implements MemberLoginService{
     @Override
-    public LoginMessage login(MemberBean memberBean) {
+    public LoginMessage login(Member member) {
         return null;
     }
 
     @Override
-    public SignupMessage signUp(MemberBean memberBean) {
+    public SignupMessage signUp(Member member) {
         return null;
     }
 }

@@ -5,7 +5,7 @@ package com.yummy.service.ManagerService;
  */
 
 import com.yummy.dao.ManagerDao;
-import com.yummy.module.ManagerBean;
+import com.yummy.pojo.Manager;
 import com.yummy.util.message.LoginMessage;
 import com.yummy.util.message.SignupMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,13 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
     }
 
     @Override
-    public LoginMessage login(ManagerBean managerBean) {
+    public LoginMessage login(Manager manager) {
 
         return null;
     }
 
     @Override
-    public SignupMessage signUp(ManagerBean managerBean) {
+    public SignupMessage signUp(Manager manager) {
         return null;
     }
 }

@@ -1,7 +1,7 @@
-package com.yummy.module;
+package com.yummy.util.exception;
 /*
  * author: SJZ
- * date: 2019/2/17
+ * date: 2019/2/20
  */
 
 import org.springframework.context.annotation.Bean;
@@ -9,13 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
-public class ModuleConfig {
-
+public class ExceptionRecorderConfig {
     @Bean
-    @Scope("prototype")
-    public ManagerBean getManagerBean(){
-        return new ManagerBean();
+    @Scope("singleton")
+    public ExceptionRecorder getErrorRecorder(){
+        return new ExceptionRecorder();
     }
-
-
 }

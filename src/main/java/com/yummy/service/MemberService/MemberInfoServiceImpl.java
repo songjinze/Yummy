@@ -4,7 +4,7 @@ package com.yummy.service.MemberService;
  * date: 2019/2/18
  */
 
-import com.yummy.module.MemberBean;
+import com.yummy.pojo.Member;
 import com.yummy.util.message.ModifyMessage;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 public class MemberInfoServiceImpl implements MemberInfoService {
 
     @Override
-    public MemberBean getMemberInfo(String email) {
+    public Member getMemberInfo(String email) {
         return null;
     }
 
     @Override
-    public ModifyMessage modifyMemberInfo(MemberBean memberBean) {
+    public ModifyMessage modifyMemberInfo(Member member) {
         return null;
     }
 

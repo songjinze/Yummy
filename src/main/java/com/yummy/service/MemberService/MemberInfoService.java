@@ -4,7 +4,7 @@ package com.yummy.service.MemberService;
  * date: 2019/2/17
  */
 
-import com.yummy.module.MemberBean;
+import com.yummy.pojo.Member;
 import com.yummy.util.message.ModifyMessage;
 
 public interface MemberInfoService {
@@ -15,14 +15,14 @@ public interface MemberInfoService {
      * @return 用户信息（如果用户存在）
      * 用户不存在则返回null
      */
-    MemberBean getMemberInfo(String email);
+    Member getMemberInfo(String email);
 
     /**
      * 修改会员信息
-     * @param memberBean 修改后的会员信息，主键不能修改
+     * @param member 修改后的会员信息，主键不能修改
      * @return ModifyMessage
      */
-    ModifyMessage modifyMemberInfo(MemberBean memberBean);
+    ModifyMessage modifyMemberInfo(Member member);
 
     /**
      * 删除会员
