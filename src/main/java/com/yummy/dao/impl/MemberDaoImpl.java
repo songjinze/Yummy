@@ -7,6 +7,7 @@ package com.yummy.dao.impl;
 import com.yummy.dao.MemberDao;
 import com.yummy.pojo.Member;
 import com.yummy.util.exception.ExceptionRecorder;
+import com.yummy.util.message.UpdateDataMessage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -30,39 +31,13 @@ public class MemberDaoImpl extends DaoCommonImpl implements MemberDao {
     }
 
     @Override
-    public boolean updateMember(Member member) {
-        Transaction transaction=null;
-        boolean result=false;
-        try(Session session=sessionFactory.openSession()){
-            transaction=session.beginTransaction();
-            session.update(member);
-            transaction.commit();
-            result=true;
-        }catch(Exception e){
-            exceptionRecorder.recordException(e);
-            if(transaction!=null){
-                transaction.rollback();
-            }
-        }
-        return result;
+    public UpdateDataMessage updateMember(Member member) {
+        return super.update(member);
     }
 
     @Override
-    public boolean deleteMember(String email) {
-        Transaction transaction=null;
-        boolean result=false;
-        try(Session session=sessionFactory.openSession()){
-            transaction=session.beginTransaction();
-            session.delete(email);
-            transaction.commit();
-            result=true;
-        }catch(Exception e){
-            exceptionRecorder.recordException(e);
-            if(transaction!=null){
-                transaction.rollback();
-            }
-        }
-        return result;
+    public UpdateDataMessage deleteMember(String email) {
+        return super.delete(email);
     }
 
 
@@ -73,6 +48,7 @@ public class MemberDaoImpl extends DaoCommonImpl implements MemberDao {
             transaction=session.beginTransaction();
             Query query=session.createQuery("FROM Member WHERE email=:email");
             query.setParameter("email",email);
+            transaction.commit();
             List res=query.list();
             if(res.size()==1){
                 return (Member)res.get(0);

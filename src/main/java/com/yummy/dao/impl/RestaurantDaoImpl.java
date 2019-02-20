@@ -7,11 +7,15 @@ package com.yummy.dao.impl;
 import com.yummy.dao.RestaurantDao;
 import com.yummy.pojo.Restaurant;
 import com.yummy.util.exception.ExceptionRecorder;
+import com.yummy.util.message.UpdateDataMessage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class RestaurantDaoImpl extends DaoCommonImpl implements RestaurantDao{
@@ -27,17 +31,33 @@ public class RestaurantDaoImpl extends DaoCommonImpl implements RestaurantDao{
     }
 
     @Override
-    public boolean updateRestaurant(Restaurant restaurant) {
-        return false;
+    public UpdateDataMessage updateRestaurant(Restaurant restaurant) {
+        return super.update(restaurant);
     }
 
     @Override
-    public boolean deleteRestaurant(Restaurant restaurant) {
-        return false;
+    public UpdateDataMessage deleteRestaurant(Restaurant restaurant) {
+        return super.delete(restaurant);
     }
 
     @Override
-    public Restaurant getRestaurantByIdCode(Restaurant restaurant) {
+    public Restaurant getRestaurantByIdCode(String idCode) {
+        Transaction transaction=null;
+        try(Session session=sessionFactory.openSession()){
+            transaction=session.beginTransaction();
+            Query query=session.createQuery("FROM Restaurant WHERE idCode=:IdCode");
+            query.setParameter("IdCode",idCode);
+            transaction.commit();
+            List res=query.list();
+            if(res.size()==1){
+                return (Restaurant)res.get(0);
+            }
+        }catch (Exception e){
+            exceptionRecorder.recordException(e);
+            if(transaction!=null){
+                transaction.rollback();
+            }
+        }
         return null;
     }
 }

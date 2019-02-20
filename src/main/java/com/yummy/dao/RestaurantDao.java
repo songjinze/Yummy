@@ -5,10 +5,11 @@ package com.yummy.dao;
  */
 
 import com.yummy.pojo.Restaurant;
+import com.yummy.util.message.UpdateDataMessage;
 
 public interface RestaurantDao {
     int insertRestaurant(Restaurant restaurant);
-    boolean updateRestaurant(Restaurant restaurant);
-    boolean deleteRestaurant(Restaurant restaurant);
-    Restaurant getRestaurantByIdCode(Restaurant restaurant);
+    UpdateDataMessage updateRestaurant(Restaurant restaurant);
+    UpdateDataMessage deleteRestaurant(Restaurant restaurant);
+    Restaurant getRestaurantByIdCode(String idCode);
 }

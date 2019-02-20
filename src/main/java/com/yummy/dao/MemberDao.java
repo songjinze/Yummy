@@ -5,6 +5,7 @@ package com.yummy.dao;
  */
 
 import com.yummy.pojo.Member;
+import com.yummy.util.message.UpdateDataMessage;
 
 public interface MemberDao {
 
@@ -18,16 +19,16 @@ public interface MemberDao {
     /**
      * 更新会员信息
      * @param member 会员bean
-     * @return true 更新成功 false 更新失败
+     * @return  更新成功  更新失败
      */
-    boolean updateMember(Member member);
+    UpdateDataMessage updateMember(Member member);
 
     /**
      * 删除会员
      * @param email 会员email
-     * @return true 删除成功 false 删除失败
+     * @return  删除成功  删除失败
      */
-    boolean deleteMember(String email);
+    UpdateDataMessage deleteMember(String email);
 
     /**
      * 根据会员email查找会员信息
