@@ -4,7 +4,7 @@ package com.yummy.service.MemberService;
  * date: 2019/2/16
  */
 
-import com.yummy.pojo.Member;
+import com.yummy.entity.Member;
 import com.yummy.util.message.LoginMessage;
 import com.yummy.util.message.SignupMessage;
 

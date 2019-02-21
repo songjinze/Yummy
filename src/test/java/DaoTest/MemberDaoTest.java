@@ -6,7 +6,7 @@ package DaoTest;
 
 import com.yummy.MainClass;
 import com.yummy.dao.MemberDao;
-import com.yummy.pojo.Member;
+import com.yummy.entity.Member;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

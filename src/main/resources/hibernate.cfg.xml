@@ -13,9 +13,9 @@
         <property name="show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class="com.yummy.pojo.Member" />
-        <mapping class="com.yummy.pojo.Manager" />
-        <mapping class="com.yummy.pojo.Order" />
-        <mapping class="com.yummy.pojo.Restaurant" />
+        <mapping class="com.yummy.entity.Member" />
+        <mapping class="com.yummy.entity.Manager" />
+        <mapping class="com.yummy.entity.Order" />
+        <mapping class="com.yummy.entity.Restaurant" />
     </session-factory>
 </hibernate-configuration>

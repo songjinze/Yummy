@@ -4,7 +4,7 @@ package com.yummy.dao;
  * date: 2019/2/18
  */
 
-import com.yummy.pojo.Member;
+import com.yummy.entity.Member;
 import com.yummy.util.message.UpdateDataMessage;
 
 public interface MemberDao {

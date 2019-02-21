@@ -5,7 +5,7 @@ package com.yummy.dao.impl;
  */
 
 import com.yummy.dao.MemberDao;
-import com.yummy.pojo.Member;
+import com.yummy.entity.Member;
 import com.yummy.util.exception.ExceptionRecorder;
 import com.yummy.util.message.UpdateDataMessage;
 import org.hibernate.Session;

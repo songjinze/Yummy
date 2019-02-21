@@ -4,7 +4,7 @@ package com.yummy.service.MemberService;
  * date: 2019/2/18
  */
 
-import com.yummy.pojo.Member;
+import com.yummy.entity.Member;
 import com.yummy.util.message.ModifyMessage;
 import org.springframework.stereotype.Service;
 

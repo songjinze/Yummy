@@ -1,10 +1,14 @@
-package com.yummy.pojo;
+package com.yummy.entity;
 /*
  * author: SJZ
  * date: 2019/2/16
  */
 
+import com.yummy.util.Address;
+import com.yummy.util.MemberLevel;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="member")
@@ -21,7 +25,16 @@ public class Member {
     private String name;
     @Column(name="phone")
     private String phone;
+    @Column(name="level")
+    private MemberLevel memberLevel;
 
+    public MemberLevel getMemberLevel() {
+        return memberLevel;
+    }
+
+    public void setMemberLevel(MemberLevel memberLevel) {
+        this.memberLevel = memberLevel;
+    }
 
     public String getEmail() {
         return email;

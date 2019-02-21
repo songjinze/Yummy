@@ -4,7 +4,7 @@ package com.yummy.service.ManagerService;
  * date: 2019/2/17
  */
 
-import com.yummy.pojo.Manager;
+import com.yummy.entity.Manager;
 import com.yummy.util.message.LoginMessage;
 import com.yummy.util.message.SignupMessage;
 

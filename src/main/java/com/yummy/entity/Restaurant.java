@@ -1,8 +1,10 @@
-package com.yummy.pojo;
+package com.yummy.entity;
 /*
  * author: SJZ
  * date: 2019/2/16
  */
+
+import com.yummy.util.Address;
 
 import javax.persistence.*;
 
@@ -15,9 +17,19 @@ public class Restaurant {
     @Column(name="idCode",length = 7,unique = true)
     private String idCode;
     @Column(name="address")
-    private String address;
+    private Address address;
     @Column(name="type")
     private String type;
+    @Column(name="name")
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;
@@ -35,11 +47,11 @@ public class Restaurant {
         this.idCode = idCode;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 

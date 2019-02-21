@@ -5,7 +5,7 @@ package com.yummy.dao.impl;
  */
 
 import com.yummy.dao.RestaurantDao;
-import com.yummy.pojo.Restaurant;
+import com.yummy.entity.Restaurant;
 import com.yummy.util.exception.ExceptionRecorder;
 import com.yummy.util.message.UpdateDataMessage;
 import org.hibernate.Session;

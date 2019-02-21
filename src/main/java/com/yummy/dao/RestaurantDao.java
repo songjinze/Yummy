@@ -4,7 +4,7 @@ package com.yummy.dao;
  * date: 2019/2/20
  */
 
-import com.yummy.pojo.Restaurant;
+import com.yummy.entity.Restaurant;
 import com.yummy.util.message.UpdateDataMessage;
 
 public interface RestaurantDao {
