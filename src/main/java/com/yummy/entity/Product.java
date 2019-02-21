@@ -23,6 +23,16 @@ public class Product {
     private int leftNum;
     @Column(name="descrip")
     private String descrip;
+    @Column(name="rid")
+    private int rid;
+
+    public int getRid() {
+        return rid;
+    }
+
+    public void setRid(int rid) {
+        this.rid = rid;
+    }
 
     public int getId() {
         return id;

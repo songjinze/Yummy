@@ -4,7 +4,14 @@ package com.yummy.dao;
  * date: 2019/2/18
  */
 
-public interface ManagerDao {
+import com.yummy.entity.Manager;
+import com.yummy.util.message.UpdateDataMessage;
 
+public interface ManagerDao {
+    int insertManager(Manager manager);
+    UpdateDataMessage updateManager(Manager manager);
+    UpdateDataMessage deleteManager(Manager manager);
+
+    Manager getManagerByName(String name);
 
 }
