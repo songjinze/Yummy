@@ -6,6 +6,7 @@ package com.yummy.dao;
 
 import com.yummy.entity.FinishedOrder;
 import com.yummy.util.message.UpdateDataMessage;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

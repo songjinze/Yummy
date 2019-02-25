@@ -6,7 +6,8 @@ package com.yummy.util.message;
 
 public enum SignupMessage {
     SINGUP_SUCCESS,
-    DUPLICATED_USER;
+    DUPLICATED_USER,
+    SINGUP_FAIL;
 
     SignupMessage(){}
 }

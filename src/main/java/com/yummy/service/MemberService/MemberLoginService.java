@@ -23,4 +23,11 @@ public interface MemberLoginService {
      * @return message
      */
     SignupMessage signUp(Member member);
+
+    /**
+     * 通过会员邮箱获得会员id
+     * @param email 会员邮箱
+     * @return 会员id
+     */
+    int getMidByEmail(String email);
 }
