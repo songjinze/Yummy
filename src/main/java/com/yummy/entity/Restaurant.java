@@ -4,9 +4,8 @@ package com.yummy.entity;
  * date: 2019/2/16
  */
 
-import com.yummy.util.Address;
-
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="restaurant")
@@ -16,12 +15,22 @@ public class Restaurant {
     private int id;
     @Column(name="idCode",length = 7,unique = true)
     private String idCode;
-    @Column(name="address")
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
     @Column(name="type")
     private String type;
     @Column(name="name")
     private String name;
+    @OneToMany(orphanRemoval = true,cascade = CascadeType.ALL)
+    private Set<Product> productSet;
+
+    public Set<Product> getProductSet() {
+        return productSet;
+    }
+
+    public void setProductSet(Set<Product> productSet) {
+        this.productSet = productSet;
+    }
 
     public String getName() {
         return name;

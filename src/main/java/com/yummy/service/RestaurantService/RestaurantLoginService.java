@@ -4,23 +4,26 @@ package com.yummy.service.RestaurantService;
  * date: 2019/2/24
  */
 
+import com.yummy.entity.Address;
 import com.yummy.entity.Restaurant;
-import com.yummy.util.message.LoginMessage;
-import com.yummy.util.message.SignupMessage;
+import com.yummy.util.message.servicemessage.LoginMessage;
+import com.yummy.util.message.servicemessage.SignupMessage;
 
 public interface RestaurantLoginService {
 
     /**
      * 餐厅登录
-     * @param restaurant 餐厅信息
+     * @param idCode 餐厅信息
      * @return loginmessage
      */
-    LoginMessage login(Restaurant restaurant);
+    LoginMessage login(String idCode);
 
     /**
-     * 餐厅注册
-     * @param restaurant 餐厅信息
-     * @return signupmessage
+     * 餐厅注册，自动分配idCode
+     * @param address 餐厅地址
+     * @param type 餐厅类型
+     * @param name 餐厅名字
+     * @return 注册成功、注册失败
      */
-    SignupMessage signUp(Restaurant restaurant);
+    SignupMessage signUp(String address, String type,String name);
 }

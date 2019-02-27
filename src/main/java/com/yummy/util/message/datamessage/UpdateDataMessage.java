@@ -1,4 +1,4 @@
-package com.yummy.util.message;
+package com.yummy.util.message.datamessage;
 /*
  * author: SJZ
  * date: 2019/2/21

@@ -1,13 +1,13 @@
-package com.yummy.util.message;
+package com.yummy.util.message.servicemessage;
 /*
  * author: SJZ
  * date: 2019/2/17
  */
 
 public enum SignupMessage {
-    SINGUP_SUCCESS,
+    SIGNUP_SUCCESS,
     DUPLICATED_USER,
-    SINGUP_FAIL;
+    SIGNUP_FAIL;
 
     SignupMessage(){}
 }

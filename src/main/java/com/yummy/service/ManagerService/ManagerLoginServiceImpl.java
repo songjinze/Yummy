@@ -6,9 +6,8 @@ package com.yummy.service.ManagerService;
 
 import com.yummy.dao.ManagerDao;
 import com.yummy.entity.Manager;
-import com.yummy.util.message.LoginMessage;
-import com.yummy.util.message.SignupMessage;
-import com.yummy.util.message.UpdateDataMessage;
+import com.yummy.util.message.servicemessage.LoginMessage;
+import com.yummy.util.message.servicemessage.SignupMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,29 +21,18 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
         this.managerDao = managerDao;
     }
 
-    @Override
-    public LoginMessage login(Manager manager) {
-        Manager manager1=managerDao.getManagerByName(manager.getName());
-        if(manager1==null){
-            return LoginMessage.NO_USER;
-        }
-        if(manager1.getPassword().equals(manager.getPassword())){
-            return LoginMessage.SUCCESS;
-        }else{
-            return LoginMessage.WRONG_PASSWD;
-        }
-    }
 
     @Override
-    public SignupMessage signUp(Manager manager) {
-        Manager manager1=managerDao.getManagerByName(manager.getName());
-        if(manager1!=null){
-            return SignupMessage.DUPLICATED_USER;
-        }
-        if(managerDao.insertManager(manager)!=-1){
-            return SignupMessage.SINGUP_SUCCESS;
+    public LoginMessage login(String name, String password) {
+        Manager manager=managerDao.getManagerByName(name);
+        if(manager==null){
+            return LoginMessage.NO_USER;
         }else{
-            return SignupMessage.SINGUP_FAIL;
+            if(manager.getPassword().equals(password)){
+                return LoginMessage.SUCCESS;
+            }else{
+                return LoginMessage.WRONG_PASSWD;
+            }
         }
     }
 

@@ -5,7 +5,7 @@ package com.yummy.dao;
  */
 
 import com.yummy.entity.Pay;
-import com.yummy.util.message.UpdateDataMessage;
+import com.yummy.util.message.datamessage.UpdateDataMessage;
 
 public interface PayDao {
     int insertPay(PayDao payDao);

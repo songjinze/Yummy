@@ -7,7 +7,7 @@ package com.yummy.dao.impl;
 import com.yummy.dao.DiscountDao;
 import com.yummy.entity.Discount;
 import com.yummy.util.exception.ExceptionRecorder;
-import com.yummy.util.message.UpdateDataMessage;
+import com.yummy.util.message.datamessage.UpdateDataMessage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

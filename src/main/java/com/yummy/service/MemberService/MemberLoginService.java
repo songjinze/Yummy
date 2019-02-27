@@ -5,24 +5,26 @@ package com.yummy.service.MemberService;
  */
 
 import com.yummy.entity.Member;
-import com.yummy.util.message.LoginMessage;
-import com.yummy.util.message.SignupMessage;
+import com.yummy.util.message.servicemessage.LoginMessage;
+import com.yummy.util.message.servicemessage.SignupMessage;
 
 public interface MemberLoginService {
 
     /**
      * 会员登录
-     * @param member 会员bean
-     * @return message
+     * @param email 会员邮箱
+     * @param password 会员密码
+     * @return 登录成功、无用户、密码错误
      */
-    LoginMessage login(Member member);
+    LoginMessage login(String email,String password);
 
     /**
      * 会员注册
-     * @param member 会员bean
-     * @return message
+     * @param email 会员邮箱
+     * @param password 会员密码
+     * @return 注册成功
      */
-    SignupMessage signUp(Member member);
+    SignupMessage signUp(String email,String password);
 
     /**
      * 通过会员邮箱获得会员id

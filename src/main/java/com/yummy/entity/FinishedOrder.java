@@ -14,7 +14,7 @@ public class FinishedOrder {
     @GeneratedValue
     private int id;
     @Column(name="finishedtime")
-    private Date finiedTime;
+    private String finiedTime;
     @Column(name="totalprice")
     private double totalPrice;
     @Column(name="rid")
@@ -30,11 +30,11 @@ public class FinishedOrder {
         this.id = id;
     }
 
-    public Date getFiniedTime() {
+    public String getFiniedTime() {
         return finiedTime;
     }
 
-    public void setFiniedTime(Date finiedTime) {
+    public void setFiniedTime(String finiedTime) {
         this.finiedTime = finiedTime;
     }
 

@@ -6,8 +6,9 @@ package com.yummy.service.MemberService;
 
 import com.yummy.dao.MemberDao;
 import com.yummy.entity.Member;
-import com.yummy.util.message.ModifyMessage;
-import com.yummy.util.message.UpdateDataMessage;
+import com.yummy.module.MemberModule;
+import com.yummy.util.message.servicemessage.ModifyMessage;
+import com.yummy.util.message.datamessage.UpdateDataMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,11 @@ public class MemberInfoServiceImpl implements MemberInfoService {
     }
 
     @Override
-    public ModifyMessage modifyMemberInfo(Member member) {
+    public ModifyMessage modifyMemberInfo(MemberModule memberModule) {
+        Member member=memberDao.getMemberByEmail(memberModule.getEmail());
+        member.setName(memberModule.getName());
+        member.setPassword(memberModule.getPassword());
+        member.setPhone(memberModule.getPassword());
         UpdateDataMessage updateDataMessage=memberDao.updateMember(member);
         if(updateDataMessage.equals(UpdateDataMessage.UPDATE_SUCCESS)){
             return ModifyMessage.MODIFY_SUCCESS;

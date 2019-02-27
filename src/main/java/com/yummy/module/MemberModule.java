@@ -1,36 +1,14 @@
-package com.yummy.entity;
+package com.yummy.module;
 /*
  * author: SJZ
- * date: 2019/2/16
+ * date: 2019/2/27
  */
 
-import javax.persistence.*;
-
-@Entity
-@Table(name="member")
-public class Member {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column(name="email",unique = true)
+public class MemberModule {
     private String email;
-    @Column(name="password")
     private String password;
-    @Column(name="name")
     private String name;
-    @Column(name="phone")
     private String phone;
-    @Column(name="level")
-    private int memberLevel;
-
-    public int getMemberLevel() {
-        return memberLevel;
-    }
-
-    public void setMemberLevel(int memberLevel) {
-        this.memberLevel = memberLevel;
-    }
 
     public String getEmail() {
         return email;
@@ -62,13 +40,5 @@ public class Member {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

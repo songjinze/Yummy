@@ -18,15 +18,15 @@ public class Discount {
     @Column(name="descrip")
     private String descrip;
     @Column(name="limittime")
-    private Date limitTime;
+    private String limitTime;
     @Column(name="discount")
     private int discount;
 
-    public Date getLimitTime() {
+    public String getLimitTime() {
         return limitTime;
     }
 
-    public void setLimitTime(Date limitTime) {
+    public void setLimitTime(String limitTime) {
         this.limitTime = limitTime;
     }
 

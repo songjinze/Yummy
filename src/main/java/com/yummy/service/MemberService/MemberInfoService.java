@@ -5,7 +5,8 @@ package com.yummy.service.MemberService;
  */
 
 import com.yummy.entity.Member;
-import com.yummy.util.message.ModifyMessage;
+import com.yummy.module.MemberModule;
+import com.yummy.util.message.servicemessage.ModifyMessage;
 
 public interface MemberInfoService {
 
@@ -18,11 +19,11 @@ public interface MemberInfoService {
     Member getMemberInfo(String email);
 
     /**
-     * 修改会员信息
-     * @param member 修改后的会员信息，主键不能修改
-     * @return ModifyMessage
+     * 修改会员信息，不包括会员level，会员email不能修改
+     * @param memberModule 会员module
+     * @return 修改成功、修改失败
      */
-    ModifyMessage modifyMemberInfo(Member member);
+    ModifyMessage modifyMemberInfo(MemberModule memberModule);
 
     /**
      * 删除会员

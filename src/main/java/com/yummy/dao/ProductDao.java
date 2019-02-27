@@ -5,7 +5,7 @@ package com.yummy.dao;
  */
 
 import com.yummy.entity.Product;
-import com.yummy.util.message.UpdateDataMessage;
+import com.yummy.util.message.datamessage.UpdateDataMessage;
 
 import java.util.List;
 
@@ -15,7 +15,6 @@ public interface ProductDao{
     UpdateDataMessage updateProduct(Product product);
     UpdateDataMessage deleteProduct(Product product);
 
-    List<Product> getProductByRid(int rid);
     List<Product> getProductByName(String name);
 
 }

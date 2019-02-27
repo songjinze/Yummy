@@ -7,7 +7,7 @@ package com.yummy.dao.impl;
 import com.yummy.dao.ProductDao;
 import com.yummy.entity.Product;
 import com.yummy.util.exception.ExceptionRecorder;
-import com.yummy.util.message.UpdateDataMessage;
+import com.yummy.util.message.datamessage.UpdateDataMessage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -38,25 +38,6 @@ public class ProductDaoImpl extends DaoCommonImpl implements ProductDao {
     @Override
     public UpdateDataMessage deleteProduct(Product product) {
         return super.delete(product);
-    }
-
-    @Override
-    public List<Product> getProductByRid(int rid) {
-        Transaction transaction=null;
-        try(Session session=sessionFactory.openSession()){
-            transaction=session.beginTransaction();
-            Query query=session.createQuery("from Product where rid=:rid");
-            query.setParameter("rid",rid);
-            List<Product> res=query.list();
-            transaction.commit();
-            return res;
-        }catch(Exception e){
-            exceptionRecorder.recordException(e);
-            if(transaction!=null){
-                transaction.rollback();
-            }
-        }
-        return new ArrayList<>();
     }
 
     @Override

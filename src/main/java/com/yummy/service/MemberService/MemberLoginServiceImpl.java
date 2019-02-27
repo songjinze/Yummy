@@ -6,8 +6,8 @@ package com.yummy.service.MemberService;
 
 import com.yummy.dao.MemberDao;
 import com.yummy.entity.Member;
-import com.yummy.util.message.LoginMessage;
-import com.yummy.util.message.SignupMessage;
+import com.yummy.util.message.servicemessage.LoginMessage;
+import com.yummy.util.message.servicemessage.SignupMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +22,12 @@ public class MemberLoginServiceImpl implements MemberLoginService{
     }
 
     @Override
-    public LoginMessage login(Member member) {
-        Member member1=memberDao.getMemberByEmail(member.getEmail());
+    public LoginMessage login(String email,String password) {
+        Member member1=memberDao.getMemberByEmail(email);
         if(member1==null){
             return LoginMessage.NO_USER;
         }
-        if(member1.getPassword().equals(member.getPassword())){
+        if(member1.getPassword().equals(password)){
             return LoginMessage.SUCCESS;
         }else{
             return LoginMessage.WRONG_PASSWD;
@@ -35,15 +35,18 @@ public class MemberLoginServiceImpl implements MemberLoginService{
     }
 
     @Override
-    public SignupMessage signUp(Member member) {
-        Member member1=memberDao.getMemberByEmail(member.getEmail());
+    public SignupMessage signUp(String email,String password) {
+        Member member1=memberDao.getMemberByEmail(email);
         if(member1!=null){
             return SignupMessage.DUPLICATED_USER;
         }
+        Member member=new Member();
+        member.setEmail(email);
+        member.setPassword(password);
         if(memberDao.insertMember(member)!=-1){
-            return SignupMessage.SINGUP_SUCCESS;
+            return SignupMessage.SIGNUP_SUCCESS;
         }else{
-            return SignupMessage.SINGUP_FAIL;
+            return SignupMessage.SIGNUP_FAIL;
         }
     }
 

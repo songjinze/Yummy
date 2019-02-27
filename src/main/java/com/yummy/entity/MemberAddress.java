@@ -1,30 +1,31 @@
 package com.yummy.entity;
 
-import com.yummy.util.Address;
-
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import static javax.persistence.CascadeType.ALL;
 
 /*
  * author: SJZ
  * date: 2019/2/21
  */
 @Entity
-@Table(name="memberaddress")
 public class MemberAddress {
     @Id
     @GeneratedValue
-    private int id;
-    @Column(name="mid")
+    private int MA_ID;
     private int mid;
-    @Column(name="address")
-    private Address address;
 
-    public int getId() {
-        return id;
+    @OneToMany(orphanRemoval = true,cascade = ALL)
+    private Set<Address> address;
+
+    public int getMA_ID() {
+        return MA_ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setMA_ID(int MA_ID) {
+        this.MA_ID = MA_ID;
     }
 
     public int getMid() {
@@ -35,11 +36,11 @@ public class MemberAddress {
         this.mid = mid;
     }
 
-    public Address getAddress() {
+    public Set<Address> getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(Set<Address> address) {
         this.address = address;
     }
 }

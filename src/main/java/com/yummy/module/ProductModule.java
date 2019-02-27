@@ -1,35 +1,25 @@
-package com.yummy.entity;
+package com.yummy.module;
 /*
  * author: SJZ
- * date: 2019/2/21
+ * date: 2019/2/27
  */
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name="product")
-public class Product {
-    @Id
-    @GeneratedValue
-    private int id;
-    @Column(name="name")
+public class ProductModule {
     private String name;
-    @Column(name="limittime")
     private String limitTime;
-    @Column(name="price")
     private double price;
-    @Column(name="leftnum")
     private int leftNum;
-    @Column(name="descrip")
     private String descrip;
+    private String restaurantIdCode;
 
-    public int getId() {
-        return id;
+    public String getRestaurantIdCode() {
+        return restaurantIdCode;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRestaurantIdCode(String restaurantIdCode) {
+        this.restaurantIdCode = restaurantIdCode;
     }
 
     public String getName() {

@@ -25,7 +25,8 @@ public class MemberController {
         this.memberInfoService = memberInfoService;
     }
 
-    @RequestMapping(value="/{user}", method= RequestMethod.GET)
+    @RequestMapping(value="/user", method= RequestMethod.GET)
+
     public String getLoginPage(@PathVariable Long user, ModelMap modelMap){
         modelMap.addAttribute("username",user);
         return "user";

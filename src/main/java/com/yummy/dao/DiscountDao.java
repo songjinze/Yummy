@@ -5,7 +5,7 @@ package com.yummy.dao;
  */
 
 import com.yummy.entity.Discount;
-import com.yummy.util.message.UpdateDataMessage;
+import com.yummy.util.message.datamessage.UpdateDataMessage;
 
 import java.util.List;
 

@@ -1,10 +1,9 @@
 package com.yummy.entity;
 
-import com.yummy.util.Address;
-import com.yummy.util.ProductList;
-
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Set;
+
+import static javax.persistence.CascadeType.ALL;
 
 /*
  * author: SJZ
@@ -16,28 +15,22 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(name="time")
-    private Date time;
-    @Column(name="address")
-    private Address address;
-    @Column(name="ispaied")
+
+    private String time;
+
     private boolean isPaied;
-    @Column(name="totalprice")
+
     private double totalPrice;
-    @Column(name="mid")
+
     private int mid;
-    @Column(name="pList")
-    private ProductList productList;
-    @Column(name="rid")
+
     private int rid;
 
-    public int getRid() {
-        return rid;
-    }
+    @OneToOne(cascade = ALL)
+    private Address address;
 
-    public void setRid(int rid) {
-        this.rid = rid;
-    }
+    @OneToMany(orphanRemoval = true,cascade = ALL)
+    private Set<Product> productList;
 
     public int getId() {
         return id;
@@ -47,20 +40,12 @@ public class Order {
         this.id = id;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public boolean isPaied() {
@@ -87,11 +72,27 @@ public class Order {
         this.mid = mid;
     }
 
-    public ProductList getProductList() {
+    public int getRid() {
+        return rid;
+    }
+
+    public void setRid(int rid) {
+        this.rid = rid;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Set<Product> getProductList() {
         return productList;
     }
 
-    public void setProductList(ProductList productList) {
+    public void setProductList(Set<Product> productList) {
         this.productList = productList;
     }
 }
