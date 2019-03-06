@@ -1,13 +1,13 @@
 package com.yummy.controller;
 
+import com.yummy.module.requestmodule.MemberLoginModule;
+import com.yummy.module.responsemodule.RestaurantNameModule;
+import com.yummy.module.responsemodule.Response;
 import com.yummy.service.MemberService.MemberInfoService;
 import com.yummy.service.MemberService.MemberLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /*
  * author: 73460
@@ -25,11 +25,21 @@ public class MemberController {
         this.memberInfoService = memberInfoService;
     }
 
-    @RequestMapping(value="/user", method= RequestMethod.GET)
+    @PostMapping("/member-login")
+    @ResponseBody
+    public Response login(@RequestBody MemberLoginModule memberLoginModule){
+        String username=memberLoginModule.getUsername();
+        String password=memberLoginModule.getPassword();
+        // TODO 连接后端
+        Response response=new Response();
+        response.setResult("success");
+        return response;
+    }
 
-    public String getLoginPage(@PathVariable Long user, ModelMap modelMap){
-        modelMap.addAttribute("username",user);
-        return "user";
+    @PostMapping("/member-getRestaurantList")
+    @ResponseBody
+    public RestaurantNameModule getRestaurantList(@RequestParam("memberEmail")String memberEmail, @RequestParam("memberAddress")String memberAddress){
+        return null;
     }
 
 }
