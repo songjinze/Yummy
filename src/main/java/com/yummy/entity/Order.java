@@ -22,9 +22,11 @@ public class Order {
 
     private double totalPrice;
 
-    private int mid;
+    @OneToOne(cascade = ALL)
+    private Member member;
 
-    private int rid;
+    @OneToOne(cascade = ALL)
+    private Restaurant restaurant;
 
     @OneToOne(cascade = ALL)
     private Address address;
@@ -64,20 +66,20 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public int getMid() {
-        return mid;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMid(int mid) {
-        this.mid = mid;
+    public void setMember(Member member) {
+        this.member = member;
     }
 
-    public int getRid() {
-        return rid;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setRid(int rid) {
-        this.rid = rid;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     public Address getAddress() {

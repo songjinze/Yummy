@@ -13,14 +13,16 @@ public class FinishedOrder {
     @Id
     @GeneratedValue
     private int id;
-    @Column(name="finishedtime")
+
     private String finiedTime;
-    @Column(name="totalprice")
+
     private double totalPrice;
-    @Column(name="rid")
-    private int rid;
-    @Column(name="mid")
-    private int mid;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Restaurant restaurant;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Member member;
 
     public int getId() {
         return id;
@@ -46,19 +48,19 @@ public class FinishedOrder {
         this.totalPrice = totalPrice;
     }
 
-    public int getRid() {
-        return rid;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setRid(int rid) {
-        this.rid = rid;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
-    public int getMid() {
-        return mid;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMid(int mid) {
-        this.mid = mid;
+    public void setMember(Member member) {
+        this.member = member;
     }
 }

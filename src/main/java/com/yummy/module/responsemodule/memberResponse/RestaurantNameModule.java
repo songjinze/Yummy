@@ -1,4 +1,4 @@
-package com.yummy.module.responsemodule;
+package com.yummy.module.responsemodule.memberResponse;
 /*
  * author: SJZ
  * date: 2019/3/1

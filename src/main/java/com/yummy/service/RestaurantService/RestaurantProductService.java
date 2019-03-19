@@ -23,5 +23,4 @@ public interface RestaurantProductService {
      */
     ProductUpdateMessage deleteProduct(ProductModule productModule);
 
-
 }

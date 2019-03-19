@@ -7,6 +7,10 @@ package com.yummy.service.MemberService;
 import com.yummy.entity.FinishedOrder;
 import com.yummy.entity.Order;
 import com.yummy.entity.Product;
+import com.yummy.module.ProductModule;
+import com.yummy.module.responsemodule.memberResponse.MemberFinishedOrderModule;
+import com.yummy.module.responsemodule.memberResponse.MemberOrderModule;
+import com.yummy.module.responsemodule.memberResponse.RestaurantNameModule;
 
 import java.util.List;
 
@@ -20,7 +24,7 @@ public interface MemberOrderService {
      * @return 订单列表
      * 无订单则返回空列表
      */
-    List<Order> getRunningOrders(int mid);
+    List<MemberOrderModule> getRunningOrders(int mid);
 
     /**
      * 根据会员id得到所有已完成的订单
@@ -28,6 +32,22 @@ public interface MemberOrderService {
      * @return 订单列表
      * 无订单则返回空列表
      */
-    List<FinishedOrder> getFinishedOrders(int mid);
+    List<MemberFinishedOrderModule> getFinishedOrders(int mid);
+
+    /**
+     * 根据会员地址获得餐厅名列表
+     * @param memberAddress 会员地址
+     * @return 餐厅列表
+     * 无餐厅则返回
+     */
+    List<RestaurantNameModule> getRestaurantNames(String memberAddress);
+
+    /**
+     * 根据餐厅名和餐厅地址得到餐厅所有商品
+     * @param restaurantName 餐厅名
+     * @param restaurantAddress 餐厅地址
+     * @return 餐厅product的列表
+     */
+    List<ProductModule> getRestaurantProducts(String restaurantName,String restaurantAddress);
 
 }
