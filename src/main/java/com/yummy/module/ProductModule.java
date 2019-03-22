@@ -14,6 +14,17 @@ public class ProductModule {
     private String descrip;
     private String restaurantIdCode;
 
+    public ProductModule(){
+    }
+    public ProductModule(String name, String limitTime, double price, int leftNum, String descrip, String restaurantIdCode) {
+        this.name = name;
+        this.limitTime = limitTime;
+        this.price = price;
+        this.leftNum = leftNum;
+        this.descrip = descrip;
+        this.restaurantIdCode = restaurantIdCode;
+    }
+
     public String getRestaurantIdCode() {
         return restaurantIdCode;
     }

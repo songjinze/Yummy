@@ -7,6 +7,7 @@ package com.yummy.service.RestaurantService;
 import com.yummy.dao.RestaurantDao;
 import com.yummy.entity.Product;
 import com.yummy.entity.Restaurant;
+import com.yummy.module.DiscountModule;
 import com.yummy.module.ProductModule;
 import com.yummy.util.message.datamessage.UpdateDataMessage;
 import com.yummy.util.message.servicemessage.ProductUpdateMessage;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Iterator;
+import java.util.List;
 
 @Repository
 public class RestaurantProductServiceImpl implements RestaurantProductService {
@@ -40,6 +42,26 @@ public class RestaurantProductServiceImpl implements RestaurantProductService {
         }else{
             return ProductUpdateMessage.UPDATE_FAIL;
         }
+    }
+
+    @Override
+    public ProductUpdateMessage createDiscount(DiscountModule discountModule) {
+        return null;
+    }
+
+    @Override
+    public ProductUpdateMessage modifyDiscount(DiscountModule discountModule) {
+        return null;
+    }
+
+    @Override
+    public DiscountModule getDiscount(String restaurantIdCode) {
+        return null;
+    }
+
+    @Override
+    public List<ProductModule> getProductList(String restaurantIdCode) {
+        return null;
     }
 
     @Override

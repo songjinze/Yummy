@@ -2,7 +2,6 @@ package com.yummy.controller;
 
 import com.yummy.module.MemberModule;
 import com.yummy.module.ProductModule;
-import com.yummy.module.RestaurantModule;
 import com.yummy.module.requestmodule.MemberInfoModule;
 import com.yummy.module.requestmodule.MemberLoginModule;
 import com.yummy.module.requestmodule.MemberRestaurantListModule;
@@ -13,6 +12,7 @@ import com.yummy.service.MemberService.MemberLoginService;
 import com.yummy.service.MemberService.MemberOrderService;
 import com.yummy.util.message.servicemessage.LoginMessage;
 import com.yummy.util.message.servicemessage.ModifyMessage;
+import com.yummy.util.message.servicemessage.SignupMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -113,24 +113,13 @@ public class MemberController {
 
     /**
      * 获得正在进行的订单
-     * @param map
+     * @param map userVid
      * @return
      */
     @PostMapping("/member-getRunningOrder")
     @ResponseBody
     public List<MemberOrderModule> getRunningOrder(@RequestBody Map map){
-        //memberOrderService.getRunningOrders(map.get("memberEmail"));
-        // TODO 连接后端
-        List<MemberOrderModule> res=new ArrayList<>();
-        for(int i=0;i<5;i++){
-            MemberOrderModule memberOrderModule=new MemberOrderModule();
-            memberOrderModule.setRestaurantName("汉堡王");
-            memberOrderModule.setDate(new Date().toString());
-            memberOrderModule.setIsPaid("true");
-            memberOrderModule.setTotalPrice(100.01);
-            res.add(memberOrderModule);
-        }
-        return res;
+        return memberOrderService.getRunningOrders(Integer.parseInt((String) map.get("userVId")));
     }
 
     /**
@@ -141,18 +130,7 @@ public class MemberController {
     @PostMapping("/member-getFinishedOrder")
     @ResponseBody
     public List<MemberFinishedOrderModule> getFinishedOrder(@RequestBody Map map){
-        //memberOrderService.getFinishedOrders();
-        // TODO 连接后端
-
-        List<MemberFinishedOrderModule> res=new ArrayList<>();
-        for(int i=0;i<5;i++){
-            MemberFinishedOrderModule memberFinishedOrderModule=new MemberFinishedOrderModule();
-            memberFinishedOrderModule.setRestaurantName("BurgerKing");
-            memberFinishedOrderModule.setDate(new Date().toString());
-            memberFinishedOrderModule.setTotalPrice("100.01");
-            res.add(memberFinishedOrderModule);
-        }
-        return res;
+        return memberOrderService.getFinishedOrders(Integer.parseInt((String)map.get("userVId")));
     }
 
     @PostMapping("/member-getRestaurantProducts")
@@ -171,6 +149,22 @@ public class MemberController {
         return res;
     }
 
+    @PostMapping("/member-signUp")
+    @ResponseBody
+    public MemberSignUpResultModule memberSignUp(@RequestBody Map map){
+        String memberEmail=(String)map.get("memberEmail");
+        String memberPassword=(String)map.get("memberPassword");
+        SignupMessage signupMessage=memberLoginService.signUp(memberEmail,memberPassword);
+        MemberSignUpResultModule memberSignUpResultModule =new MemberSignUpResultModule();
+        if(signupMessage.equals(SignupMessage.SIGNUP_SUCCESS)){
+            memberSignUpResultModule.setResult("success");
+        }else if(signupMessage.equals(SignupMessage.DUPLICATED_USER)){
+            memberSignUpResultModule.setResult("duplicated-user");
+        }else{
+            memberSignUpResultModule.setResult("fail");
+        }
+        return memberSignUpResultModule;
+    }
 
 
 }

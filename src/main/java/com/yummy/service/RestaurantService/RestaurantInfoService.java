@@ -12,7 +12,7 @@ public interface RestaurantInfoService {
 
     /**
      * 修改餐厅信息
-     * @param restaurant 餐厅信息
+     * @param restaurantModule
      * @return modifymessage
      */
     ModifyMessage modifyRestaurantMessage(RestaurantModule restaurantModule);
