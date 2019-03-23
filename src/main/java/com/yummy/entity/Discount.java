@@ -22,6 +22,18 @@ public class Discount {
     @Column(name="discount")
     private int discount;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="restaurant_id")
+    private Restaurant restaurant;
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
     public String getLimitTime() {
         return limitTime;
     }

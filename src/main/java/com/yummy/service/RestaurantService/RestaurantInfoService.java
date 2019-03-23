@@ -7,7 +7,9 @@ package com.yummy.service.RestaurantService;
 import com.yummy.entity.Restaurant;
 import com.yummy.module.RestaurantModule;
 import com.yummy.util.message.servicemessage.ModifyMessage;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface RestaurantInfoService {
 
     /**

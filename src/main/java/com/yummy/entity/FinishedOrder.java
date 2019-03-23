@@ -14,14 +14,16 @@ public class FinishedOrder {
     @GeneratedValue
     private int id;
 
-    private String finiedTime;
+    private String finishedTime;
 
     private double totalPrice;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="restaurantId")
     private Restaurant restaurant;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="memberId")
     private Member member;
 
     public int getId() {
@@ -32,12 +34,12 @@ public class FinishedOrder {
         this.id = id;
     }
 
-    public String getFiniedTime() {
-        return finiedTime;
+    public String getFinishedTime() {
+        return finishedTime;
     }
 
-    public void setFiniedTime(String finiedTime) {
-        this.finiedTime = finiedTime;
+    public void setFinishedTime(String finishedTime) {
+        this.finishedTime = finishedTime;
     }
 
     public double getTotalPrice() {

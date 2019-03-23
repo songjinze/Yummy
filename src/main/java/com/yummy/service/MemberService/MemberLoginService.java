@@ -7,7 +7,9 @@ package com.yummy.service.MemberService;
 import com.yummy.entity.Member;
 import com.yummy.util.message.servicemessage.LoginMessage;
 import com.yummy.util.message.servicemessage.SignupMessage;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface MemberLoginService {
 
     /**

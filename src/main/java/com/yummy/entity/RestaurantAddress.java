@@ -1,20 +1,19 @@
 package com.yummy.entity;
-/*
- * author: SJZ
- * date: 2019/2/21
- */
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-@Table(name="address")
-public class Address implements Serializable {
+@Table(name="restaurantaddress")
+public class RestaurantAddress {
     @Id
     @GeneratedValue
     private int id;
-    @Column(name="address")
+
     private String address;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="restaurant_Id")
+    private Restaurant restaurant;
 
     public int getId() {
         return id;
@@ -30,5 +29,13 @@ public class Address implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

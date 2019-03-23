@@ -4,8 +4,6 @@ package com.yummy.module;
  * date: 2019/2/27
  */
 
-import com.yummy.entity.Address;
-
 public class RestaurantModule {
     private String idCode;
     private String type;

@@ -22,17 +22,17 @@ public class Order {
 
     private double totalPrice;
 
-    @OneToOne(cascade = ALL)
+    @ManyToOne(cascade = ALL)
+    @JoinColumn(name="member_id")
     private Member member;
 
-    @OneToOne(cascade = ALL)
+    @ManyToOne(cascade = ALL)
+    @JoinColumn(name="restaurant_id")
     private Restaurant restaurant;
 
-    @OneToOne(cascade = ALL)
-    private Address address;
-
-    @OneToMany(orphanRemoval = true,cascade = ALL)
-    private Set<Product> productList;
+    @OneToOne(cascade = ALL )
+    @JoinColumn(name="memberAddress_id")
+    private MemberAddress address;
 
     public int getId() {
         return id;
@@ -82,19 +82,11 @@ public class Order {
         this.restaurant = restaurant;
     }
 
-    public Address getAddress() {
+    public MemberAddress getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(MemberAddress address) {
         this.address = address;
-    }
-
-    public Set<Product> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(Set<Product> productList) {
-        this.productList = productList;
     }
 }

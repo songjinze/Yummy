@@ -1,46 +1,46 @@
 package com.yummy.entity;
-
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-
-import static javax.persistence.CascadeType.ALL;
-
 /*
  * author: SJZ
  * date: 2019/2/21
  */
+
+import javax.persistence.*;
+import java.io.Serializable;
+
 @Entity
-public class MemberAddress {
+@Table(name="memberaddress")
+public class MemberAddress implements Serializable {
     @Id
     @GeneratedValue
-    private int MA_ID;
-    private int mid;
+    private int id;
+    @Column(name="address")
+    private String address;
 
-    @OneToMany(orphanRemoval = true,cascade = ALL)
-    private Set<Address> address;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="address_id")
+    private Member member;
 
-    public int getMA_ID() {
-        return MA_ID;
+    public int getId() {
+        return id;
     }
 
-    public void setMA_ID(int MA_ID) {
-        this.MA_ID = MA_ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getMid() {
-        return mid;
-    }
-
-    public void setMid(int mid) {
-        this.mid = mid;
-    }
-
-    public Set<Address> getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Set<Address> address) {
+    public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 }

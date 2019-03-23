@@ -11,9 +11,11 @@ import com.yummy.module.ProductModule;
 import com.yummy.module.responsemodule.memberResponse.MemberFinishedOrderModule;
 import com.yummy.module.responsemodule.memberResponse.MemberOrderModule;
 import com.yummy.module.responsemodule.memberResponse.RestaurantNameModule;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface MemberOrderService {
 
     // TODO 添加新增订单的方法

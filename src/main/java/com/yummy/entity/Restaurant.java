@@ -15,14 +15,30 @@ public class Restaurant {
     private int id;
     @Column(name="idCode",length = 7,unique = true)
     private String idCode;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Address address;
+
     @Column(name="type")
     private String type;
     @Column(name="name")
     private String name;
-    @OneToMany(orphanRemoval = true,cascade = CascadeType.ALL)
+
+    @OneToMany(orphanRemoval = true,cascade = CascadeType.ALL,mappedBy = "restaurant")
     private Set<Product> productSet;
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "restaurant")
+    private Discount discount;
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "restaurant")
+    private MemberAddress address;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "restaurant")
+    private Set<Order> orders;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "restaurant")
+    private Set<FinishedOrder> finishedOrders;
+
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
+    }
 
     public Set<Product> getProductSet() {
         return productSet;
@@ -56,11 +72,11 @@ public class Restaurant {
         this.idCode = idCode;
     }
 
-    public Address getAddress() {
+    public MemberAddress getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(MemberAddress address) {
         this.address = address;
     }
 

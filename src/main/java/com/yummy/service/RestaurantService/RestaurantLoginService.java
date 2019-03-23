@@ -4,11 +4,11 @@ package com.yummy.service.RestaurantService;
  * date: 2019/2/24
  */
 
-import com.yummy.entity.Address;
-import com.yummy.entity.Restaurant;
 import com.yummy.util.message.servicemessage.LoginMessage;
 import com.yummy.util.message.servicemessage.SignupMessage;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface RestaurantLoginService {
 
     /**

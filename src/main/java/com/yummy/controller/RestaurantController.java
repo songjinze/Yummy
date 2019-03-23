@@ -206,6 +206,8 @@ public class RestaurantController {
         return restaurantProductService.getProductList(restaurantIdCode);
     }
 
+    @PostMapping("deleteProduct")
+    @ResponseBody
     public Response deleteProduct(@RequestBody Map map){
         int productId=(int)map.get("productId");
         String productDate=(String)map.get("productDate");

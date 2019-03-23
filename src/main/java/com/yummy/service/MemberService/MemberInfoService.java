@@ -7,7 +7,9 @@ package com.yummy.service.MemberService;
 import com.yummy.entity.Member;
 import com.yummy.module.MemberModule;
 import com.yummy.util.message.servicemessage.ModifyMessage;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface MemberInfoService {
 
     /**

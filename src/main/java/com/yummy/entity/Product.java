@@ -24,6 +24,18 @@ public class Product {
     @Column(name="descrip")
     private String descrip;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="restaurantId")
+    private Restaurant restaurant;
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
     public int getId() {
         return id;
     }

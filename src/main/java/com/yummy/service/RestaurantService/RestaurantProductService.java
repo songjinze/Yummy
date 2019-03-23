@@ -7,9 +7,11 @@ package com.yummy.service.RestaurantService;
 import com.yummy.module.DiscountModule;
 import com.yummy.module.ProductModule;
 import com.yummy.util.message.servicemessage.ProductUpdateMessage;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface RestaurantProductService {
     /**
      * 发布一个单品信息

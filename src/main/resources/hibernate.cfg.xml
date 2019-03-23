@@ -17,7 +17,7 @@
         <mapping class="com.yummy.entity.Manager" />
         <mapping class="com.yummy.entity.Order" />
         <mapping class="com.yummy.entity.Restaurant" />
-        <mapping class="com.yummy.entity.Address" />
+        <mapping class="com.yummy.entity.MemberAddress" />
         <mapping class="com.yummy.entity.MemberAddress" />
         <mapping class="com.yummy.entity.Discount" />
         <mapping class="com.yummy.entity.FinishedOrder" />

@@ -74,16 +74,6 @@ public class MemberController {
         return memberOrderService.getRestaurantNames(memberAddress);
     }
 
-    @PostMapping("/member-getRestaurantInfo")
-    @ResponseBody
-    public RestaurantDescriptionModule getRestaurantDescription(@RequestBody Map map ){
-        // TODO 连接后端
-        RestaurantDescriptionModule restaurantDescriptionModule=new RestaurantDescriptionModule();
-        restaurantDescriptionModule.setRestaurantDescription("this is a restaurant");
-        restaurantDescriptionModule.setRestaurantName((String)map.get("restaurantName"));
-        return restaurantDescriptionModule;
-    }
-
     /**
      * 修改用户信息
      * @param memberInfoModule email username password phone

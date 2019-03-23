@@ -4,10 +4,10 @@ package com.yummy.service.ManagerService;
  * date: 2019/2/17
  */
 
-import com.yummy.entity.Manager;
 import com.yummy.util.message.servicemessage.LoginMessage;
-import com.yummy.util.message.servicemessage.SignupMessage;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface ManagerLoginService {
 
     /**
