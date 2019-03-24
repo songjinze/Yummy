@@ -8,6 +8,7 @@ import com.yummy.module.responsemodule.memberResponse.MemberFinishedOrderModule;
 import com.yummy.module.responsemodule.memberResponse.MemberOrderModule;
 import com.yummy.module.responsemodule.memberResponse.RestaurantNameModule;
 import com.yummy.service.MemberService.MemberOrderService;
+import com.yummy.util.message.servicemessage.MemberOrderMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,18 @@ public class MemberOrderServiceImpl implements MemberOrderService {
     public MemberOrderServiceImpl(MemberDao memberDao,RestaurantDao restaurantDao) {
         this.memberDao = memberDao;
         this.restaurantDao=restaurantDao;
+    }
+
+    @Override
+    public MemberOrderMessage createOrder(MemberOrderModule memberOrderModule) {
+        // TODO
+        return null;
+    }
+
+    @Override
+    public MemberOrderMessage payOrder(MemberOrderModule memberOrderModule) {
+        // TODO
+        return null;
     }
 
     @Override
@@ -59,7 +72,6 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 
     @Override
     public List<RestaurantNameModule> getRestaurantNames(String memberAddress) {
-        // TODO 添加对地址的判断
         List<RestaurantNameModule> restaurantNameModules=new ArrayList<>();
         List<Restaurant> restaurants=restaurantDao.getAllRestaurant();
         for(Restaurant restaurant:restaurants){

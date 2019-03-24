@@ -11,6 +11,7 @@ import com.yummy.module.ProductModule;
 import com.yummy.module.responsemodule.memberResponse.MemberFinishedOrderModule;
 import com.yummy.module.responsemodule.memberResponse.MemberOrderModule;
 import com.yummy.module.responsemodule.memberResponse.RestaurantNameModule;
+import com.yummy.util.message.servicemessage.MemberOrderMessage;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,19 @@ import java.util.List;
 @Service
 public interface MemberOrderService {
 
-    // TODO 添加新增订单的方法
+    /**
+     * 新增一个顶点，未付款
+     * @param memberOrderModule
+     * @return
+     */
+    MemberOrderMessage createOrder(MemberOrderModule memberOrderModule);
+
+    /**
+     * 付款一个订单
+     * @param memberOrderModule
+     * @return
+     */
+    MemberOrderMessage payOrder(MemberOrderModule memberOrderModule);
 
     /**
      * 根据会员id得到所有未完成的订单
