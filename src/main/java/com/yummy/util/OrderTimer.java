@@ -4,11 +4,14 @@ import com.yummy.module.responsemodule.memberResponse.MemberOrderModule;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import static java.lang.System.gc;
 
 @Component
 @Scope("singleton")
@@ -22,9 +25,11 @@ public class OrderTimer {
     }
 
     class OneOrder implements Runnable{
-        MemberOrderModule memberOrderModule;
-        OneOrder(MemberOrderModule memberOrderModule){
+        private MemberOrderModule memberOrderModule;
+        private String memberEmail;
+        OneOrder(String memberEmail,MemberOrderModule memberOrderModule){
             this.memberOrderModule=memberOrderModule;
+            this.memberEmail=memberEmail;
         }
         @Override
         public void run() {
@@ -33,6 +38,7 @@ public class OrderTimer {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            orderModuleHashSet.get(memberEmail).remove(memberOrderModule);
         }
     }
     public void addOrder(String memberEmail,MemberOrderModule memberOrderModule){
@@ -43,6 +49,16 @@ public class OrderTimer {
             memberOrderModules=new LinkedList<>();
         }
         memberOrderModules.add(memberOrderModule);
+        orderModuleHashSet.put(memberEmail,memberOrderModules);
+        OneOrder oneOrder=new OneOrder(memberEmail,memberOrderModule);
+        executorService.execute(oneOrder);
+    }
 
+    public List<MemberOrderModule> getMemberOrderModulesByEmail(String memberEmail){
+        if(orderModuleHashSet.containsKey(memberEmail)){
+            return orderModuleHashSet.get(memberEmail);
+        }else{
+            return new ArrayList<>();
+        }
     }
 }

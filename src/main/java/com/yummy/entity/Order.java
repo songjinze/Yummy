@@ -9,7 +9,7 @@ import static javax.persistence.CascadeType.ALL;
  * date: 2019/2/16
  */
 @Entity
-@Table(name="order")
+@Table(name="unFinishedOrder")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

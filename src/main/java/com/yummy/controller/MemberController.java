@@ -10,6 +10,7 @@ import com.yummy.module.responsemodule.memberResponse.*;
 import com.yummy.service.MemberService.MemberInfoService;
 import com.yummy.service.MemberService.MemberLoginService;
 import com.yummy.service.MemberService.MemberOrderService;
+import com.yummy.util.MemberCheckCodeContainer;
 import com.yummy.util.message.servicemessage.LoginMessage;
 import com.yummy.util.message.servicemessage.ModifyMessage;
 import com.yummy.util.message.servicemessage.SignupMessage;
@@ -29,12 +30,14 @@ public class MemberController {
     private final MemberLoginService memberLoginService;
     private final MemberInfoService memberInfoService;
     private final MemberOrderService memberOrderService;
+    private final MemberCheckCodeContainer memberCheckCodeContainer;
 
     @Autowired
-    public MemberController(MemberLoginService memberLoginService, MemberInfoService memberInfoService,MemberOrderService memberOrderService) {
+    public MemberController(MemberCheckCodeContainer memberCheckCodeContainer,MemberLoginService memberLoginService, MemberInfoService memberInfoService,MemberOrderService memberOrderService) {
         this.memberLoginService = memberLoginService;
         this.memberInfoService = memberInfoService;
         this.memberOrderService=memberOrderService;
+        this.memberCheckCodeContainer=memberCheckCodeContainer;
     }
 
     /**
@@ -139,13 +142,25 @@ public class MemberController {
         return res;
     }
 
+    @PostMapping("/member-getCheckCode")
+    public void getCheckCode(@RequestBody Map map){
+        String memberEmail=(String)map.get("memberEmail");
+        memberCheckCodeContainer.sendAndCreateCode(memberEmail);
+    }
+
     @PostMapping("/member-signUp")
     @ResponseBody
     public MemberSignUpResultModule memberSignUp(@RequestBody Map map){
         String memberEmail=(String)map.get("memberEmail");
         String memberPassword=(String)map.get("memberPassword");
-        SignupMessage signupMessage=memberLoginService.signUp(memberEmail,memberPassword);
+        String memberCheckCode=(String)map.get("checkCode");
         MemberSignUpResultModule memberSignUpResultModule =new MemberSignUpResultModule();
+        if(!memberCheckCode.equals(memberCheckCodeContainer.getCodeByEmail(memberEmail))){
+            memberSignUpResultModule.setResult("wrong-checkCode");
+        }else{
+            memberCheckCodeContainer.alreadySignUp(memberEmail);
+        }
+        SignupMessage signupMessage=memberLoginService.signUp(memberEmail,memberPassword);
         if(signupMessage.equals(SignupMessage.SIGNUP_SUCCESS)){
             memberSignUpResultModule.setResult("success");
         }else if(signupMessage.equals(SignupMessage.DUPLICATED_USER)){
