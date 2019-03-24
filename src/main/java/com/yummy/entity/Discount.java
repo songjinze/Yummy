@@ -13,8 +13,6 @@ public class Discount {
     @Id
     @GeneratedValue
     private int id;
-    @Column(name="rid")
-    private int rid;
     @Column(name="descrip")
     private String descrip;
     @Column(name="limittime")
@@ -56,14 +54,6 @@ public class Discount {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getRid() {
-        return rid;
-    }
-
-    public void setRid(int rid) {
-        this.rid = rid;
     }
 
     public String getDescrip() {

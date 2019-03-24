@@ -18,10 +18,10 @@
         <mapping class="com.yummy.entity.Order" />
         <mapping class="com.yummy.entity.Restaurant" />
         <mapping class="com.yummy.entity.MemberAddress" />
-        <mapping class="com.yummy.entity.MemberAddress" />
         <mapping class="com.yummy.entity.Discount" />
         <mapping class="com.yummy.entity.FinishedOrder" />
         <mapping class="com.yummy.entity.Pay" />
         <mapping class="com.yummy.entity.Product" />
+        <mapping class="com.yummy.entity.RestaurantAddress" />
     </session-factory>
 </hibernate-configuration>

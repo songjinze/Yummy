@@ -1,7 +1,6 @@
 package com.yummy.entity;
 
 import javax.persistence.*;
-import java.util.Set;
 
 import static javax.persistence.CascadeType.ALL;
 
@@ -16,22 +15,25 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(name="date")
     private String time;
 
+    @Column(name="isPaied")
     private boolean isPaied;
 
+    @Column(name="totalPrice")
     private double totalPrice;
 
     @ManyToOne(cascade = ALL)
-    @JoinColumn(name="member_id")
+    @JoinColumn(name="memberId")
     private Member member;
 
     @ManyToOne(cascade = ALL)
-    @JoinColumn(name="restaurant_id")
+    @JoinColumn(name="restaurantId")
     private Restaurant restaurant;
 
     @OneToOne(cascade = ALL )
-    @JoinColumn(name="memberAddress_id")
+    @JoinColumn(name="memberAddressId")
     private MemberAddress address;
 
     public int getId() {

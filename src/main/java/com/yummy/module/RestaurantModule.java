@@ -10,6 +10,14 @@ public class RestaurantModule {
     private String name;
     private String address;
 
+    public RestaurantModule(){}
+    public RestaurantModule(String idCode, String type, String name, String address) {
+        this.idCode = idCode;
+        this.type = type;
+        this.name = name;
+        this.address = address;
+    }
+
     public String getIdCode() {
         return idCode;
     }

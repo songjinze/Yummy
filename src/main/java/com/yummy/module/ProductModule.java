@@ -7,6 +7,7 @@ package com.yummy.module;
 import java.util.Date;
 
 public class ProductModule {
+    private int id;
     private String name;
     private String limitTime;
     private double price;
@@ -23,6 +24,14 @@ public class ProductModule {
         this.leftNum = leftNum;
         this.descrip = descrip;
         this.restaurantIdCode = restaurantIdCode;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRestaurantIdCode() {

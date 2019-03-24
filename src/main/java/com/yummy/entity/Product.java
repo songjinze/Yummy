@@ -6,6 +6,7 @@ package com.yummy.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="product")
@@ -24,7 +25,7 @@ public class Product {
     @Column(name="descrip")
     private String descrip;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="restaurantId")
     private Restaurant restaurant;
 

@@ -28,10 +28,4 @@ public interface MemberLoginService {
      */
     SignupMessage signUp(String email,String password);
 
-    /**
-     * 通过会员邮箱获得会员id
-     * @param email 会员邮箱
-     * @return 会员id
-     */
-    int getMidByEmail(String email);
 }

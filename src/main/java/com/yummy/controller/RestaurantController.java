@@ -219,6 +219,7 @@ public class RestaurantController {
         productModule.setLimitTime(productDate);
         productModule.setDescrip(productDescription);
         productModule.setLeftNum(leftNum);
+        productModule.setId(productId);
         ProductUpdateMessage updateMessage=restaurantProductService.deleteProduct(productModule);
         Response response=new Response();
         if(updateMessage.equals(ProductUpdateMessage.UPDATE_SUCCESS)){

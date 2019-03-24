@@ -4,8 +4,6 @@ package com.yummy.entity;
  * date: 2019/2/16
  */
 
-import org.hibernate.annotations.LazyToOne;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -31,7 +29,7 @@ public class Member {
     private Pay pay;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "member")
-    private MemberAddress memberAddress;
+    private Set<MemberAddress> memberAddress;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "member")
     private Set<Order> orders;
@@ -48,11 +46,11 @@ public class Member {
         this.pay = pay;
     }
 
-    public MemberAddress getMemberAddress() {
+    public Set<MemberAddress> getMemberAddress() {
         return memberAddress;
     }
 
-    public void setMemberAddress(MemberAddress memberAddress) {
+    public void setMemberAddress(Set<MemberAddress> memberAddress) {
         this.memberAddress = memberAddress;
     }
 

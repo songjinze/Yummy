@@ -5,10 +5,30 @@ package com.yummy.module;
  */
 
 public class MemberModule {
+    private int id;
     private String email;
     private String password;
     private String name;
     private String phone;
+
+    public MemberModule(){
+    }
+
+    public MemberModule(int id, String email, String password, String name, String phone) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.phone = phone;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;

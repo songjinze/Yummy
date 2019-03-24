@@ -9,6 +9,7 @@ public class RestaurantFinishedOrderModule {
     private String date;
     private double totalPrice;
 
+    public RestaurantFinishedOrderModule(){}
     public RestaurantFinishedOrderModule(int orderId, String date, double totalPrice) {
         this.orderId = orderId;
         this.date = date;

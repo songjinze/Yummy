@@ -8,6 +8,13 @@ public class RestaurantNameModule {
     private String restaurantName;
     private String restaurantAddress;
 
+    public RestaurantNameModule(String restaurantName, String restaurantAddress) {
+        this.restaurantName = restaurantName;
+        this.restaurantAddress = restaurantAddress;
+    }
+
+    public RestaurantNameModule(){}
+
     public String getRestaurantName() {
         return restaurantName;
     }

@@ -9,6 +9,13 @@ public class MemberFinishedOrderModule {
     private String date;
     private String totalPrice;
 
+    public MemberFinishedOrderModule(){}
+    public MemberFinishedOrderModule(String restaurantName, String date, String totalPrice) {
+        this.restaurantName = restaurantName;
+        this.date = date;
+        this.totalPrice = totalPrice;
+    }
+
     public String getRestaurantName() {
         return restaurantName;
     }

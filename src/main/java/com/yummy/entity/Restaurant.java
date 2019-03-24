@@ -26,7 +26,7 @@ public class Restaurant {
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "restaurant")
     private Discount discount;
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "restaurant")
-    private MemberAddress address;
+    private RestaurantAddress restaurantAddress;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "restaurant")
     private Set<Order> orders;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "restaurant")
@@ -72,12 +72,28 @@ public class Restaurant {
         this.idCode = idCode;
     }
 
-    public MemberAddress getAddress() {
-        return address;
+    public RestaurantAddress getRestaurantAddress() {
+        return restaurantAddress;
     }
 
-    public void setAddress(MemberAddress address) {
-        this.address = address;
+    public void setRestaurantAddress(RestaurantAddress restaurantAddress) {
+        this.restaurantAddress = restaurantAddress;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Set<FinishedOrder> getFinishedOrders() {
+        return finishedOrders;
+    }
+
+    public void setFinishedOrders(Set<FinishedOrder> finishedOrders) {
+        this.finishedOrders = finishedOrders;
     }
 
     public String getType() {

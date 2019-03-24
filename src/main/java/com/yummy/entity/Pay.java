@@ -16,11 +16,11 @@ public class Pay {
     private String name;
     @Column(name="password")
     private String password;
-    @Column(name="accountbalance")
+    @Column(name="accountBalance")
     private double accountBalance;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="member_id")
+    @JoinColumn(name="memberId")
     private Member member;
 
     public Member getMember() {

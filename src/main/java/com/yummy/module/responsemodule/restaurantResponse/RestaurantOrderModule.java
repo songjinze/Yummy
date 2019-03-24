@@ -10,6 +10,7 @@ public class RestaurantOrderModule {
     private String isPaid;
     private double totalPrice;
 
+    public RestaurantOrderModule(){}
     public RestaurantOrderModule(int orderId, String date, String isPaid, double totalPrice) {
         this.orderId = orderId;
         this.date = date;

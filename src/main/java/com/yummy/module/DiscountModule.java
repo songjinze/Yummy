@@ -10,7 +10,6 @@ public class DiscountModule {
     private int discount;
 
     public DiscountModule(){
-
     }
 
     public DiscountModule(String restaurantIdCode, String limitTime, int discount) {

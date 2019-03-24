@@ -11,6 +11,15 @@ public class MemberOrderModule {
     private String isPaid;
     private double totalPrice;
 
+    public MemberOrderModule(){}
+
+    public MemberOrderModule(String date, String restaurantName, String isPaid, double totalPrice) {
+        this.date = date;
+        this.restaurantName = restaurantName;
+        this.isPaid = isPaid;
+        this.totalPrice = totalPrice;
+    }
+
     public String getRestaurantName() {
         return restaurantName;
     }

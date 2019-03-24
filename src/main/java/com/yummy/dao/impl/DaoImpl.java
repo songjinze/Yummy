@@ -9,10 +9,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class DaoImpl<T> implements Dao<T> {
 
@@ -23,9 +21,8 @@ public class DaoImpl<T> implements Dao<T> {
     @Autowired
     public DaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
-        Type genType=getClass().getGenericSuperclass();
-        Type[] params=((ParameterizedType)genType).getActualTypeArguments();
-        entityClass=(Class<T>)params[0];
+        ParameterizedType type=(ParameterizedType)(getClass().getGenericSuperclass());
+        entityClass=(Class<T>)type.getActualTypeArguments()[0];
     }
 
     @Override
@@ -47,11 +44,11 @@ public class DaoImpl<T> implements Dao<T> {
 
     @SuppressWarnings("all")
     @Override
-    public List<T> getByQuery(String Query) {
+    public List<T> getByQuery(String hql) {
         Transaction t=null;
         try(Session session=sessionFactory.openSession()){
             t=session.beginTransaction();
-            Query query=session.createQuery(Query,entityClass);
+            Query query=session.createQuery(hql);
             List<T> res=query.list();
             t.commit();
             session.close();

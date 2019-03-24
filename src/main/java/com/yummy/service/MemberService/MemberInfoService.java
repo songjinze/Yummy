@@ -4,7 +4,6 @@ package com.yummy.service.MemberService;
  * date: 2019/2/17
  */
 
-import com.yummy.entity.Member;
 import com.yummy.module.MemberModule;
 import com.yummy.util.message.servicemessage.ModifyMessage;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public interface MemberInfoService {
      * @return 用户信息（如果用户存在）
      * 用户不存在则返回null
      */
-    Member getMemberInfo(String email);
+    MemberModule getMemberInfo(String email);
 
     /**
      * 修改会员信息，不包括会员level，会员email不能修改
