@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("/restaurant-")
 @Controller
 public class RestaurantController {
 
@@ -49,8 +48,9 @@ public class RestaurantController {
     private final String RESTAURANT_ADDRESS="restaurantAddress";
     private final String RESTAURANT_TYPE="restaurantType";
     private final String RESTAURANT_NAME="restaurantName";
+    private final String RESTAURANT_EMAIL="email";
 
-    @PostMapping("login")
+    @PostMapping("/restaurant-login")
     @ResponseBody
     public RestaurantLoginResponseModule restaurantLogin(@RequestBody Map map){
         String restaurantIdCode=(String) map.get(USERNAME);
@@ -64,13 +64,14 @@ public class RestaurantController {
         return restaurantLoginResponseModule;
     }
 
-    @PostMapping("signUp")
+    @PostMapping("/restaurant-signUp")
     @ResponseBody
     public RestaurantSignUpResponseModule restaurantSignUp(@RequestBody Map map){
         String restaurantAddress=(String)map.get(RESTAURANT_ADDRESS);
         String restaurantType=(String)map.get(RESTAURANT_TYPE);
         String restaurantName=(String)map.get(RESTAURANT_NAME);
-        SignupMessage signupMessage=restaurantLoginService.signUp(restaurantAddress,restaurantType,restaurantName);
+        String restaurantEmail=(String)map.get(RESTAURANT_EMAIL);
+        SignupMessage signupMessage=restaurantLoginService.signUp(restaurantEmail,restaurantAddress,restaurantType,restaurantName);
         RestaurantSignUpResponseModule restaurantSignUpResponseModule=new RestaurantSignUpResponseModule();
         if(signupMessage.equals(SignupMessage.SIGNUP_SUCCESS)){
             restaurantSignUpResponseModule.setResult("success");
@@ -82,7 +83,7 @@ public class RestaurantController {
         return restaurantSignUpResponseModule;
     }
 
-    @PostMapping("saveRestaurantInfo")
+    @PostMapping("/restaurant-saveRestaurantInfo")
     @ResponseBody
     public RestaurantSaveInfoModule restaurantSaveInfo(@RequestBody Map map){
         String restaurantIdCode=(String)map.get(ID);
@@ -104,16 +105,17 @@ public class RestaurantController {
         return restaurantSaveInfoModule;
     }
 
-    @PostMapping("createProduct")
+    @PostMapping("/restaurant-createProduct")
     @ResponseBody
     public Response createProduct(@RequestBody Map map){
         String restaurantIdCode=(String)map.get(ID);
         String productName=(String) map.get("productName");
-        Integer productNum=((Double) map.get("productNum")).intValue();
-        Double productPrice=(Double) map.get("productPrice");
+        Integer productNum=((int) map.get("productNum"));
+        Double productPrice=Double.parseDouble((String) map.get("productPrice"));
         String limitTime=(String) map.get("date");
         String productDescription=(String)map.get("productDescription");
-        ProductModule productModule=new ProductModule(productName,
+        ProductModule productModule=new ProductModule(
+                productName,
                 limitTime,
                 productPrice,
                 productNum,
@@ -129,7 +131,7 @@ public class RestaurantController {
         return response;
     }
 
-    @PostMapping("createDiscount")
+    @PostMapping("/restaurant-createDiscount")
     @ResponseBody
     public Response createDiscount(@RequestBody Map map){
         String restaurantIdCode=(String) map.get(ID);
@@ -146,7 +148,7 @@ public class RestaurantController {
         return response;
     }
 
-    @PostMapping("getDiscount")
+    @PostMapping("/restaurant-getDiscount")
     @ResponseBody
     public DiscountResponseModule getDiscount(@RequestBody Map map){
         String restaurantIdCode=(String)map.get(ID);
@@ -157,21 +159,21 @@ public class RestaurantController {
         return new DiscountResponseModule(discountModule.getLimitTime(),discountModule.getDiscount());
     }
 
-    @PostMapping("getRunningOrders")
+    @PostMapping("/restaurant-getRunningOrders")
     @ResponseBody
     public List<RestaurantOrderModule> getRestaurantOrders(@RequestBody Map map){
         String restaurantIdCode=(String)map.get(ID);
         return restaurantOrderService.getRestaurantOrders(restaurantIdCode);
     }
 
-    @PostMapping("getFinishedOrders")
+    @PostMapping("/restaurant-getFinishedOrders")
     @ResponseBody
     public List<RestaurantFinishedOrderModule> getRestaurantFinishedOrders(@RequestBody Map map){
         String restaurantIdCode=(String)map.get(ID);
         return restaurantOrderService.getRestaurantFinishedOrders(restaurantIdCode);
     }
 
-    @PostMapping("cancelOrder")
+    @PostMapping("/restaurant-cancelOrder")
     @ResponseBody
     public Response cancelOrder(@RequestBody Map map){
         int orderId=(int)map.get("orderId");
@@ -185,7 +187,7 @@ public class RestaurantController {
         return response;
     }
 
-    @PostMapping("finishOrder")
+    @PostMapping("/restaurant-finishOrder")
     @ResponseBody
     public Response finishOrder(@RequestBody Map map){
         int orderId=(int)map.get("orderId");
@@ -199,14 +201,14 @@ public class RestaurantController {
         return response;
     }
 
-    @PostMapping("productList")
+    @PostMapping("/restaurant-productList")
     @ResponseBody
     public List<ProductModule> getProductList(@RequestBody Map map){
         String restaurantIdCode=(String)map.get(ID);
         return restaurantProductService.getProductList(restaurantIdCode);
     }
 
-    @PostMapping("deleteProduct")
+    @PostMapping("/restaurant-deleteProduct")
     @ResponseBody
     public Response deleteProduct(@RequestBody Map map){
         int productId=(int)map.get("productId");

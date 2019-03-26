@@ -18,6 +18,7 @@ public class MemberDaoImpl extends DaoImpl<Member> implements MemberDao {
     @Override
     public Member getMemberByEmail(String email) {
         List<Member> members=this.getByQuery("from Member where email=\'"+email+"\'");
+       // System.out.println(members.get(0).getEmail());
         if(members.size()==0){
             return null;
         }

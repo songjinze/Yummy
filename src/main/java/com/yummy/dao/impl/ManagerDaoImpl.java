@@ -15,7 +15,7 @@ public class ManagerDaoImpl extends DaoImpl<Manager> implements ManagerDao {
 
     @Override
     public Manager getManagerByName(String managerName) {
-        List<Manager> managers=getByQuery("from Manager where name=\'"+managerName+"\'");
+        List<Manager> managers=getByQuery("from Manager as m where m.name=\'"+managerName+"\'");
         if(managers.size()==0){
             return null;
         }else{

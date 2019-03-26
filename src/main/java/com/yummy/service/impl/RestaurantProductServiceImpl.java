@@ -9,6 +9,7 @@ import com.yummy.entity.Restaurant;
 import com.yummy.module.DiscountModule;
 import com.yummy.module.ProductModule;
 import com.yummy.service.RestaurantService.RestaurantProductService;
+import com.yummy.util.Date;
 import com.yummy.util.message.datamessage.UpdateDataMessage;
 import com.yummy.util.message.servicemessage.ProductUpdateMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,14 @@ public class RestaurantProductServiceImpl implements RestaurantProductService {
     private final RestaurantDao restaurantDao;
     private final ProductDao productDao;
     private final DiscountDao discountDao;
+    private final Date date;
 
     @Autowired
-    public RestaurantProductServiceImpl(DiscountDao discountDao,RestaurantDao restaurantDao, ProductDao productDao) {
+    public RestaurantProductServiceImpl(DiscountDao discountDao, RestaurantDao restaurantDao, ProductDao productDao, Date date) {
         this.restaurantDao = restaurantDao;
         this.productDao = productDao;
         this.discountDao=discountDao;
+        this.date = date;
     }
 
     @Override
@@ -52,6 +55,9 @@ public class RestaurantProductServiceImpl implements RestaurantProductService {
     @Override
     public ProductUpdateMessage deleteProduct(ProductModule productModule) {
         Product product=productDao.get(productModule.getId());
+        if(product==null){
+            return ProductUpdateMessage.UPDATE_FAIL;
+        }
         UpdateDataMessage updateDataMessage=productDao.delete(product);
         if(updateDataMessage.equals(UpdateDataMessage.UPDATE_SUCCESS)){
             return ProductUpdateMessage.UPDATE_SUCCESS;
@@ -95,17 +101,21 @@ public class RestaurantProductServiceImpl implements RestaurantProductService {
     public List<ProductModule> getProductList(String restaurantIdCode) {
         Restaurant restaurant=restaurantDao.getRestaurantByIdCode(restaurantIdCode);
         List<ProductModule> productModules=new ArrayList<>();
+        String now=date.getDate();
         if(restaurant!=null){
             Set<Product> productSet=restaurant.getProductSet();
             for(Product product:productSet){
-                productModules.add(new ProductModule(
-                        product.getName(),
-                        product.getLimitTime(),
-                        product.getPrice(),
-                        product.getLeftNum(),
-                        product.getDescrip(),
-                        null
-                ));
+                if(date.compareTo(now,product.getLimitTime())==-1) {
+                    productModules.add(new ProductModule(
+                            product.getId(),
+                            product.getName(),
+                            product.getLimitTime(),
+                            product.getPrice(),
+                            product.getLeftNum(),
+                            product.getDescrip(),
+                            null
+                    ));
+                }
             }
         }
         return productModules;

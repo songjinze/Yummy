@@ -7,7 +7,9 @@ import javax.persistence.*;
 public class SignUpToCheck {
     @Id
     @GeneratedValue
-    private long id;
+    private int id;
+
+    private String email;
 
     private String address;
 
@@ -16,17 +18,26 @@ public class SignUpToCheck {
     private String name;
 
     public SignUpToCheck(){}
-    public SignUpToCheck(String address, String type, String name) {
+    public SignUpToCheck(String email,String address, String type, String name) {
+        this.email=email;
         this.address = address;
         this.type = type;
         this.name = name;
     }
 
-    public long getId() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

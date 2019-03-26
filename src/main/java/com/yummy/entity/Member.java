@@ -5,6 +5,8 @@ package com.yummy.entity;
  */
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -12,9 +14,9 @@ import java.util.Set;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private int id;
-    @Column(name="email",unique = true)
+    @Column(name="email")
     private String email;
     @Column(name="password")
     private String password;
@@ -25,57 +27,24 @@ public class Member {
     @Column(name="level")
     private int memberLevel;
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "member")
-    private Pay pay;
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "member",fetch = FetchType.LAZY)
+    private Pay pay=null;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "member")
-    private Set<MemberAddress> memberAddress;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "member",fetch = FetchType.EAGER)
+    private Set<MemberAddress> memberAddress=new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "member")
-    private Set<Order> orders;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "member",fetch = FetchType.EAGER)
+    private Set<Order> orders=new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "member")
-    private Set<FinishedOrder> finishedOrders;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "member",fetch = FetchType.EAGER)
+    private Set<FinishedOrder> finishedOrders=new HashSet<>();
 
-
-    public Pay getPay() {
-        return pay;
+    public int getId() {
+        return id;
     }
 
-    public void setPay(Pay pay) {
-        this.pay = pay;
-    }
-
-    public Set<MemberAddress> getMemberAddress() {
-        return memberAddress;
-    }
-
-    public void setMemberAddress(Set<MemberAddress> memberAddress) {
-        this.memberAddress = memberAddress;
-    }
-
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
-
-    public Set<FinishedOrder> getFinishedOrders() {
-        return finishedOrders;
-    }
-
-    public void setFinishedOrders(Set<FinishedOrder> finishedOrders) {
-        this.finishedOrders = finishedOrders;
-    }
-
-    public int getMemberLevel() {
-        return memberLevel;
-    }
-
-    public void setMemberLevel(int memberLevel) {
-        this.memberLevel = memberLevel;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -110,11 +79,28 @@ public class Member {
         this.phone = phone;
     }
 
-    public int getId() {
-        return id;
+    public int getMemberLevel() {
+        return memberLevel;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setMemberLevel(int memberLevel) {
+        this.memberLevel = memberLevel;
     }
+
+    public Pay getPay() {
+        return pay;
+    }
+
+    public Set<MemberAddress> getMemberAddress() {
+        return memberAddress;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public Set<FinishedOrder> getFinishedOrders() {
+        return finishedOrders;
+    }
+
 }

@@ -1,4 +1,5 @@
 import com.yummy.MainClass;
+import com.yummy.controller.MemberController;
 import com.yummy.module.MemberModule;
 import com.yummy.service.MemberService.MemberInfoService;
 import com.yummy.service.MemberService.MemberLoginService;
@@ -17,7 +18,6 @@ import javax.transaction.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = MainClass.class)
-@Transactional
 public class MemberTest {
 
     @Autowired
@@ -26,10 +26,18 @@ public class MemberTest {
     @Autowired
     private MemberInfoService memberInfoService;
 
+    @Autowired
+    private MemberController memberController;
+
     private String email="test";
     private String password="12345";
 
     public MemberTest(){
+    }
+
+    @Test
+    public void test(){
+        memberController.memberSignUp(null);
     }
 
     @Test

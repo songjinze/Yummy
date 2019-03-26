@@ -17,7 +17,18 @@ public class ProductModule {
 
     public ProductModule(){
     }
+
     public ProductModule(String name, String limitTime, double price, int leftNum, String descrip, String restaurantIdCode) {
+        this.name = name;
+        this.limitTime = limitTime;
+        this.price = price;
+        this.leftNum = leftNum;
+        this.descrip = descrip;
+        this.restaurantIdCode = restaurantIdCode;
+    }
+
+    public ProductModule(int id, String name, String limitTime, double price, int leftNum, String descrip, String restaurantIdCode) {
+        this.id=id;
         this.name = name;
         this.limitTime = limitTime;
         this.price = price;

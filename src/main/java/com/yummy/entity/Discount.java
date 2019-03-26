@@ -20,7 +20,7 @@ public class Discount {
     @Column(name="discount")
     private int discount;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="restaurant_id")
     private Restaurant restaurant;
 

@@ -53,9 +53,9 @@ public class MemberController {
         String password=memberLoginModule.getPassword();
         LoginMessage loginMessage=memberLoginService.login(username,password);
         MemberLoginResultModule memberLoginResultModule=new MemberLoginResultModule();
-        int userId=memberInfoService.getMemberInfo(username).getId();
-        memberLoginResultModule.setUserId(userId);
         if(loginMessage.equals(LoginMessage.SUCCESS)){
+            int userId=memberInfoService.getMemberInfo(username).getId();
+            memberLoginResultModule.setUserId(userId);
             memberLoginResultModule.setResult("success");
         }else if(loginMessage.equals(LoginMessage.NO_USER)){
             memberLoginResultModule.setResult("no-user");
@@ -143,9 +143,11 @@ public class MemberController {
     }
 
     @PostMapping("/member-getCheckCode")
-    public void getCheckCode(@RequestBody Map map){
+    @ResponseBody
+    public String getCheckCode(@RequestBody Map map){
         String memberEmail=(String)map.get("memberEmail");
         memberCheckCodeContainer.sendAndCreateCode(memberEmail);
+        return "send!";
     }
 
     @PostMapping("/member-signUp")
@@ -154,12 +156,16 @@ public class MemberController {
         String memberEmail=(String)map.get("memberEmail");
         String memberPassword=(String)map.get("memberPassword");
         String memberCheckCode=(String)map.get("checkCode");
+//        String memberEmail="zhangsan";
+//        String memberPassword="123";
         MemberSignUpResultModule memberSignUpResultModule =new MemberSignUpResultModule();
-        if(!memberCheckCode.equals(memberCheckCodeContainer.getCodeByEmail(memberEmail))){
-            memberSignUpResultModule.setResult("wrong-checkCode");
-        }else{
-            memberCheckCodeContainer.alreadySignUp(memberEmail);
-        }
+        // TODO 发送验证码方法，之后要加回来
+//        if(!memberCheckCode.equals(memberCheckCodeContainer.getCodeByEmail(memberEmail))){
+//            memberSignUpResultModule.setResult("wrong-checkCode");
+//            return memberSignUpResultModule;
+//        }else{
+//            memberCheckCodeContainer.alreadySignUp(memberEmail);
+//        }
         SignupMessage signupMessage=memberLoginService.signUp(memberEmail,memberPassword);
         if(signupMessage.equals(SignupMessage.SIGNUP_SUCCESS)){
             memberSignUpResultModule.setResult("success");

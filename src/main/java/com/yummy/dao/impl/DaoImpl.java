@@ -23,93 +23,99 @@ public class DaoImpl<T> implements Dao<T> {
         this.sessionFactory = sessionFactory;
         ParameterizedType type=(ParameterizedType)(getClass().getGenericSuperclass());
         entityClass=(Class<T>)type.getActualTypeArguments()[0];
+        System.out.println(entityClass);
     }
 
     @Override
     public T get(int id) {
-        Transaction t=null;
-        try(Session session=sessionFactory.openSession()){
-            t=session.beginTransaction();
-            T res=session.get(entityClass,id);
-            t.commit();
-            session.close();
-            return res;
+        T res=null;
+        Session session=sessionFactory.openSession();
+        try{
+            res=session.get(entityClass,id);
         }catch (Exception e){
-            if(t!=null){
-                t.rollback();
-            }
+            e.printStackTrace();
+        }finally {
+            session.close();
         }
-        return null;
+        return res;
     }
 
     @SuppressWarnings("all")
     @Override
     public List<T> getByQuery(String hql) {
-        Transaction t=null;
-        try(Session session=sessionFactory.openSession()){
-            t=session.beginTransaction();
+        Session session=sessionFactory.openSession();
+        List<T> res=new ArrayList<>();
+        try{
             Query query=session.createQuery(hql);
-            List<T> res=query.list();
-            t.commit();
-            session.close();
-            return res;
+            res=query.list();
         }catch (Exception e){
-            if(t!=null){
-                t.rollback();
-            }
+            e.printStackTrace();
+        }finally {
+            session.close();
         }
-        return new ArrayList<>();
+        return res;
     }
 
 
     @Override
     public UpdateDataMessage save(T t) {
         Transaction ts=null;
-        try(Session session=sessionFactory.openSession()){
+        Session session=sessionFactory.openSession();
+        try{
             ts=session.beginTransaction();
             session.save(t);
             ts.commit();
-            session.close();
-            return UpdateDataMessage.UPDATE_SUCCESS;
         }catch (Exception e){
             if(ts!=null){
                 ts.rollback();
             }
+            e.printStackTrace();
+            return UpdateDataMessage.UPDATE_FAIL;
+        }finally {
+            session.close();
         }
-        return UpdateDataMessage.UPDATE_FAIL;
+        return UpdateDataMessage.UPDATE_SUCCESS;
     }
 
     @Override
     public UpdateDataMessage update(T t) {
         Transaction ts=null;
-        try(Session session=sessionFactory.openSession()){
+        Session session=sessionFactory.openSession();
+        try{
             ts=session.beginTransaction();
-            session.saveOrUpdate(t);
+            session.update(t);
             ts.commit();
-            session.close();
-            return UpdateDataMessage.UPDATE_SUCCESS;
         }catch (Exception e){
             if(ts!=null){
                 ts.rollback();
             }
+            e.printStackTrace();
+            return UpdateDataMessage.UPDATE_FAIL;
+        }finally {
+            session.close();
         }
-        return UpdateDataMessage.UPDATE_FAIL;
+        return UpdateDataMessage.UPDATE_SUCCESS;
+
     }
 
     @Override
     public UpdateDataMessage delete(T t) {
         Transaction ts=null;
-        try(Session session=sessionFactory.openSession()){
+        Session session=sessionFactory.openSession();
+        try{
             ts=session.beginTransaction();
             session.delete(t);
             ts.commit();
-            session.close();
-            return UpdateDataMessage.UPDATE_SUCCESS;
+
         }catch (Exception e){
             if(ts!=null){
                 ts.rollback();
             }
+            e.printStackTrace();
+            return UpdateDataMessage.UPDATE_FAIL;
+        }finally {
+            session.close();
         }
-        return UpdateDataMessage.UPDATE_FAIL;
+        return UpdateDataMessage.UPDATE_SUCCESS;
     }
 }

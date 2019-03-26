@@ -32,7 +32,7 @@ public class RestaurantDaoImpl extends DaoImpl<Restaurant> implements Restaurant
         List<Restaurant> restaurants=getByQuery("from Restaurant where name=\'"+
                 restaurantName+"\'");
         for(Restaurant restaurant:restaurants){
-            if(restaurant.getRestaurantAddress().getAddress().equals(restaurantAddress)){
+            if(restaurant.getAddress().equals(restaurantAddress)){
                 return restaurant;
             }
         }

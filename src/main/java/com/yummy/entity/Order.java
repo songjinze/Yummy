@@ -32,9 +32,15 @@ public class Order {
     @JoinColumn(name="restaurantId")
     private Restaurant restaurant;
 
-    @OneToOne(cascade = ALL )
-    @JoinColumn(name="memberAddressId")
-    private MemberAddress address;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public int getId() {
         return id;
@@ -84,11 +90,4 @@ public class Order {
         this.restaurant = restaurant;
     }
 
-    public MemberAddress getAddress() {
-        return address;
-    }
-
-    public void setAddress(MemberAddress address) {
-        this.address = address;
-    }
 }

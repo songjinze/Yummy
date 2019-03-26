@@ -32,12 +32,12 @@ public class RestaurantLoginServiceImpl implements RestaurantLoginService {
     }
 
     @Override
-    public SignupMessage signUp(String address, String type, String name) {
+    public SignupMessage signUp(String email,String address, String type, String name) {
         Restaurant restaurant=restaurantDao.getRestaurantByNameAndAddress(name,address);
         if(restaurant!=null){
             return SignupMessage.DUPLICATED_USER;
         }
-        SignUpToCheck signUpToCheck=new SignUpToCheck(address,type,name);
+        SignUpToCheck signUpToCheck=new SignUpToCheck(email,address,type,name);
         UpdateDataMessage updateDataMessage=checkDao.save(signUpToCheck);
         if(updateDataMessage.equals(UpdateDataMessage.UPDATE_SUCCESS)){
             return SignupMessage.SIGNUP_SUCCESS;

@@ -18,15 +18,15 @@ public class ManagerTest {
     @Autowired
     private ManagerLoginService managerLoginService;
 
-    private String managerName="testManager";
-    private String managerPassword="testManagerPassword";
+    private String managerName="zhangsan";
+    private String managerPassword="12345";
 
     @Test
     public void testManagerLogin(){
         managerLoginService.setManager(managerName,managerPassword);
         LoginMessage loginMessage=managerLoginService.login(managerName,managerPassword);
         LoginMessage loginMessage1=managerLoginService.login(managerPassword,managerName);
-        LoginMessage loginMessage2=managerLoginService.login(managerName,"123445");
+        LoginMessage loginMessage2=managerLoginService.login(managerName,"123");
         Assert.assertEquals(LoginMessage.NO_USER,loginMessage1);
         Assert.assertEquals(LoginMessage.SUCCESS,loginMessage);
         Assert.assertEquals(LoginMessage.WRONG_PASSWD,loginMessage2);

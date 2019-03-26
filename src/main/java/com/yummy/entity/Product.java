@@ -25,7 +25,7 @@ public class Product {
     @Column(name="descrip")
     private String descrip;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="restaurantId")
     private Restaurant restaurant;
 

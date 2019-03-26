@@ -20,7 +20,7 @@ public class MemberLoginServiceImpl implements MemberLoginService {
     }
 
     @Override
-    public LoginMessage login(String email, String password) {
+    public synchronized LoginMessage login(String email, String password) {
         Member member= memberDaoImpl.getMemberByEmail(email);
         if(member==null){
             return LoginMessage.NO_USER;
@@ -34,7 +34,7 @@ public class MemberLoginServiceImpl implements MemberLoginService {
     }
 
     @Override
-    public SignupMessage signUp(String email, String password) {
+    public synchronized SignupMessage signUp(String email, String password) {
         Member member=memberDaoImpl.getMemberByEmail(email);
         if(member!=null){
             return SignupMessage.DUPLICATED_USER;

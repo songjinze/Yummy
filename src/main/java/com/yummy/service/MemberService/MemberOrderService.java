@@ -4,9 +4,6 @@ package com.yummy.service.MemberService;
  * date: 2019/2/18
  */
 
-import com.yummy.entity.FinishedOrder;
-import com.yummy.entity.Order;
-import com.yummy.entity.Product;
 import com.yummy.module.ProductModule;
 import com.yummy.module.responsemodule.memberResponse.MemberFinishedOrderModule;
 import com.yummy.module.responsemodule.memberResponse.MemberOrderModule;
@@ -19,19 +16,27 @@ import java.util.List;
 @Service
 public interface MemberOrderService {
 
+
     /**
-     * 新增一个顶点，未付款
+     * 创建订单(未支付)
      * @param memberOrderModule
      * @return
      */
     MemberOrderMessage createOrder(MemberOrderModule memberOrderModule);
 
     /**
-     * 付款一个订单
+     * 对一个订单付款完成(改变订单状态为已支付),需填写订单id
      * @param memberOrderModule
      * @return
      */
     MemberOrderMessage payOrder(MemberOrderModule memberOrderModule);
+
+    /**
+     * 获得未付款的订单（只获得在时限之内的）
+     * @param mid
+     * @return
+     */
+    List<MemberOrderModule> getUnpaidOrders(int mid);
 
     /**
      * 根据会员id得到所有未完成的订单

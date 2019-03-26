@@ -1,10 +1,10 @@
 package com.yummy.util;
 
 import org.springframework.stereotype.Component;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.Message;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
@@ -29,18 +29,19 @@ public class EmailSender {
             transport.connect("smtp.qq.com","734609160@qq.com","bbngjdeiihrebaif");
 
         } catch (MessagingException | UnsupportedEncodingException e) {
-            // e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
     public void sendEmail(String toAddress,String context){
         try {
-            message.setContent(context, "text/html;charset=utf-8");
+            message.setContent(context, "text/plain;charset=utf-8");
             transport.sendMessage(this.message,new Address[]{
                     new InternetAddress(toAddress),new InternetAddress(toAddress)
             });
         } catch (MessagingException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
+
 }

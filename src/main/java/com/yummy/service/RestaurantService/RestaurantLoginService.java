@@ -20,10 +20,11 @@ public interface RestaurantLoginService {
 
     /**
      * 餐厅注册，自动分配idCode
+     * @param email 餐厅接收idCode邮箱
      * @param address 餐厅地址
      * @param type 餐厅类型
      * @param name 餐厅名字
      * @return 注册成功、注册失败
      */
-    SignupMessage signUp(String address, String type,String name);
+    SignupMessage signUp(String email,String address, String type,String name);
 }
