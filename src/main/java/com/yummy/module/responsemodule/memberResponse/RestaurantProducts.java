@@ -5,10 +5,40 @@ package com.yummy.module.responsemodule.memberResponse;
  */
 
 public class RestaurantProducts {
+    private int pId;
     private String date;
     private String leftNum;
     private String productName;
     private String productDescription;
+    private double productPrice;
+
+    public RestaurantProducts(){
+
+    }
+    public RestaurantProducts(int pId, String date, String leftNum, String productName, String productDescription, double productPrice) {
+        this.pId = pId;
+        this.date = date;
+        this.leftNum = leftNum;
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.productPrice = productPrice;
+    }
+
+    public int getpId() {
+        return pId;
+    }
+
+    public void setpId(int pId) {
+        this.pId = pId;
+    }
+
+    public double getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
+    }
 
     public String getDate() {
         return date;

@@ -1,8 +1,8 @@
 import com.yummy.MainClass;
 import com.yummy.controller.MemberController;
 import com.yummy.module.MemberModule;
-import com.yummy.service.MemberService.MemberInfoService;
-import com.yummy.service.MemberService.MemberLoginService;
+import com.yummy.service.memberservice.MemberInfoService;
+import com.yummy.service.memberservice.MemberLoginService;
 import com.yummy.util.message.servicemessage.LoginMessage;
 import com.yummy.util.message.servicemessage.ModifyMessage;
 import com.yummy.util.message.servicemessage.SignupMessage;
@@ -12,8 +12,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.transaction.Transactional;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

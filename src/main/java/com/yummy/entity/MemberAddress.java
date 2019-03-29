@@ -16,7 +16,7 @@ public class MemberAddress implements Serializable {
     @Column(name="address")
     private String address;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="address_id")
     private Member member;
 

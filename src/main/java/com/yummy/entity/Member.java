@@ -27,17 +27,37 @@ public class Member {
     @Column(name="level")
     private int memberLevel;
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "member",fetch = FetchType.LAZY)
-    private Pay pay=null;
+    private double currentBalance;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "member",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "member",fetch = FetchType.EAGER)
     private Set<MemberAddress> memberAddress=new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "member",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "member",fetch = FetchType.EAGER)
     private Set<Order> orders=new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "member",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "member",fetch = FetchType.EAGER)
     private Set<FinishedOrder> finishedOrders=new HashSet<>();
+
+
+    public double getCurrentBalance() {
+        return currentBalance;
+    }
+
+    public void setCurrentBalance(double currentBalance) {
+        this.currentBalance = currentBalance;
+    }
+
+    public void setMemberAddress(Set<MemberAddress> memberAddress) {
+        this.memberAddress = memberAddress;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public void setFinishedOrders(Set<FinishedOrder> finishedOrders) {
+        this.finishedOrders = finishedOrders;
+    }
 
     public int getId() {
         return id;
@@ -87,9 +107,6 @@ public class Member {
         this.memberLevel = memberLevel;
     }
 
-    public Pay getPay() {
-        return pay;
-    }
 
     public Set<MemberAddress> getMemberAddress() {
         return memberAddress;

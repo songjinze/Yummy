@@ -2,7 +2,7 @@ package com.yummy.service.impl;
 
 import com.yummy.dao.ManagerDao;
 import com.yummy.entity.Manager;
-import com.yummy.service.ManagerService.ManagerLoginService;
+import com.yummy.service.managerservice.ManagerLoginService;
 import com.yummy.util.message.servicemessage.LoginMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

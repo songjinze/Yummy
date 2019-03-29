@@ -24,7 +24,7 @@ public class MemberCheckCodeContainer {
 
     public void sendAndCreateCode(String memberEmail){
         String checkCode=checkCodeCreator.createCheckCode();
-        con.put(memberEmail,checkCode);
+        con.put(memberEmail,"验证码为："+checkCode);
         emailSender.sendEmail(memberEmail,checkCode);
     }
 

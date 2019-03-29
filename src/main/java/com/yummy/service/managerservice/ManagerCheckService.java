@@ -1,4 +1,4 @@
-package com.yummy.service.ManagerService;
+package com.yummy.service.managerservice;
 
 import com.yummy.module.SignUpToCheckModule;
 import com.yummy.util.message.servicemessage.ModifyMessage;

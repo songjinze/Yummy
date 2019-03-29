@@ -23,13 +23,13 @@ public class Restaurant {
     @Column(name="address")
     private String address;
 
-    @OneToMany(orphanRemoval = true,cascade = CascadeType.ALL,mappedBy = "restaurant",fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval = true,mappedBy = "restaurant",fetch = FetchType.EAGER)
     private Set<Product> productSet;
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "restaurant",fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "restaurant",fetch = FetchType.EAGER)
     private Discount discount;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "restaurant",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "restaurant",fetch = FetchType.EAGER)
     private Set<Order> orders;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "restaurant",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "restaurant",fetch = FetchType.EAGER)
     private Set<FinishedOrder> finishedOrders;
 
     public String getAddress() {

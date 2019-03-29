@@ -1,6 +1,6 @@
 import com.yummy.MainClass;
 import com.yummy.util.CheckCodeCreator;
-import com.yummy.util.Date;
+import com.yummy.util.MyOwnDate;
 import com.yummy.util.EmailSender;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class UtilTest {
     @Autowired
     private EmailSender emailSender;
     @Autowired
-    private Date date;
+    private MyOwnDate myOwnDate;
     @Autowired
     private CheckCodeCreator checkCodeCreator;
 
@@ -29,14 +29,14 @@ public class UtilTest {
 
     @Test
     public void testDate(){
-        String now=date.getDate();
+        String now= myOwnDate.getDate();
         System.out.println(now);
         String []nowSep=now.split("-");
         String tomorrow=nowSep[0]+"-"+nowSep[1]+"-"+(Integer.parseInt(nowSep[2])+1);
         String yesterday=nowSep[0]+"-"+nowSep[1]+"-"+(Integer.parseInt(nowSep[2])-1);
-        Assert.assertEquals(-1,date.compareTo(now,tomorrow));
-        Assert.assertEquals(1,date.compareTo(now,yesterday));
-        Assert.assertEquals(0,date.compareTo(now,now));
+        Assert.assertEquals(-1, myOwnDate.compareTo(now,tomorrow));
+        Assert.assertEquals(1, myOwnDate.compareTo(now,yesterday));
+        Assert.assertEquals(0, myOwnDate.compareTo(now,now));
     }
 
     @Test

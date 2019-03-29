@@ -8,8 +8,8 @@ import com.yummy.entity.Product;
 import com.yummy.entity.Restaurant;
 import com.yummy.module.DiscountModule;
 import com.yummy.module.ProductModule;
-import com.yummy.service.RestaurantService.RestaurantProductService;
-import com.yummy.util.Date;
+import com.yummy.service.restaurantservice.RestaurantProductService;
+import com.yummy.util.MyOwnDate;
 import com.yummy.util.message.datamessage.UpdateDataMessage;
 import com.yummy.util.message.servicemessage.ProductUpdateMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +24,14 @@ public class RestaurantProductServiceImpl implements RestaurantProductService {
     private final RestaurantDao restaurantDao;
     private final ProductDao productDao;
     private final DiscountDao discountDao;
-    private final Date date;
+    private final MyOwnDate myOwnDate;
 
     @Autowired
-    public RestaurantProductServiceImpl(DiscountDao discountDao, RestaurantDao restaurantDao, ProductDao productDao, Date date) {
+    public RestaurantProductServiceImpl(DiscountDao discountDao, RestaurantDao restaurantDao, ProductDao productDao, MyOwnDate myOwnDate) {
         this.restaurantDao = restaurantDao;
         this.productDao = productDao;
         this.discountDao=discountDao;
-        this.date = date;
+        this.myOwnDate = myOwnDate;
     }
 
     @Override
@@ -73,12 +73,24 @@ public class RestaurantProductServiceImpl implements RestaurantProductService {
 
     @Override
     public ProductUpdateMessage modifyDiscount(DiscountModule discountModule) {
-        Discount discount=new Discount();
-        discount.setLimitTime(discountModule.getLimitTime());
-        discount.setDiscount(discountModule.getDiscount());
         Restaurant restaurant=restaurantDao.getRestaurantByIdCode(discountModule.getRestaurantIdCode());
-        discount.setRestaurant(restaurant);
-        UpdateDataMessage updateDataMessage=discountDao.update(discount);
+        if(restaurant==null){
+            return ProductUpdateMessage.UPDATE_FAIL;
+        }
+        Discount discount=restaurant.getDiscount();
+        UpdateDataMessage updateDataMessage;
+        if(discount==null){
+            discount=new Discount();
+            discount.setLimitTime(discountModule.getLimitTime());
+            discount.setDiscount(discountModule.getDiscount());
+            discount.setRestaurant(restaurant);
+            updateDataMessage=discountDao.save(discount);
+        }else{
+            discount.setLimitTime(discountModule.getLimitTime());
+            discount.setDiscount(discountModule.getDiscount());
+            discount.setRestaurant(restaurant);
+            updateDataMessage=discountDao.update(discount);
+        }
         if(updateDataMessage.equals(UpdateDataMessage.UPDATE_SUCCESS)){
             return ProductUpdateMessage.UPDATE_SUCCESS;
         }else{
@@ -93,6 +105,9 @@ public class RestaurantProductServiceImpl implements RestaurantProductService {
             return null;
         }else{
             Discount discount=restaurant.getDiscount();
+            if(discount==null){
+                return new DiscountModule(null, myOwnDate.getDate(),100);
+            }
             return new DiscountModule(null,discount.getLimitTime(),discount.getDiscount());
         }
     }
@@ -101,11 +116,11 @@ public class RestaurantProductServiceImpl implements RestaurantProductService {
     public List<ProductModule> getProductList(String restaurantIdCode) {
         Restaurant restaurant=restaurantDao.getRestaurantByIdCode(restaurantIdCode);
         List<ProductModule> productModules=new ArrayList<>();
-        String now=date.getDate();
+        String now= myOwnDate.getDate();
         if(restaurant!=null){
             Set<Product> productSet=restaurant.getProductSet();
             for(Product product:productSet){
-                if(date.compareTo(now,product.getLimitTime())==-1) {
+                if(myOwnDate.compareTo(now,product.getLimitTime())==-1) {
                     productModules.add(new ProductModule(
                             product.getId(),
                             product.getName(),

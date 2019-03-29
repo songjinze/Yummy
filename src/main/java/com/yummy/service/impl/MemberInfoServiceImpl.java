@@ -3,7 +3,7 @@ package com.yummy.service.impl;
 import com.yummy.dao.MemberDao;
 import com.yummy.entity.Member;
 import com.yummy.module.MemberModule;
-import com.yummy.service.MemberService.MemberInfoService;
+import com.yummy.service.memberservice.MemberInfoService;
 import com.yummy.util.message.datamessage.UpdateDataMessage;
 import com.yummy.util.message.servicemessage.ModifyMessage;
 import org.springframework.beans.factory.annotation.Autowired;

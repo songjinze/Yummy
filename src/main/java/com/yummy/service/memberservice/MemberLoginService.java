@@ -1,10 +1,9 @@
-package com.yummy.service.MemberService;
+package com.yummy.service.memberservice;
 /*
  * author: SJZ
  * date: 2019/2/16
  */
 
-import com.yummy.entity.Member;
 import com.yummy.util.message.servicemessage.LoginMessage;
 import com.yummy.util.message.servicemessage.SignupMessage;
 import org.springframework.stereotype.Service;

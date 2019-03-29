@@ -19,17 +19,6 @@ public class Pay {
     @Column(name="accountBalance")
     private double accountBalance;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="memberId")
-    private Member member;
-
-    public Member getMember() {
-        return member;
-    }
-
-    public void setMember(Member member) {
-        this.member = member;
-    }
 
     public int getId() {
         return id;

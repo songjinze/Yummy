@@ -4,7 +4,7 @@ import com.yummy.dao.RestaurantDao;
 import com.yummy.dao.SignUpToCheckDao;
 import com.yummy.entity.Restaurant;
 import com.yummy.entity.SignUpToCheck;
-import com.yummy.service.RestaurantService.RestaurantLoginService;
+import com.yummy.service.restaurantservice.RestaurantLoginService;
 import com.yummy.util.message.datamessage.UpdateDataMessage;
 import com.yummy.util.message.servicemessage.LoginMessage;
 import com.yummy.util.message.servicemessage.SignupMessage;

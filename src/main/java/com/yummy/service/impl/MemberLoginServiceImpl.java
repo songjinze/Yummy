@@ -2,7 +2,7 @@ package com.yummy.service.impl;
 
 import com.yummy.dao.MemberDao;
 import com.yummy.entity.Member;
-import com.yummy.service.MemberService.MemberLoginService;
+import com.yummy.service.memberservice.MemberLoginService;
 import com.yummy.util.message.datamessage.UpdateDataMessage;
 import com.yummy.util.message.servicemessage.LoginMessage;
 import com.yummy.util.message.servicemessage.SignupMessage;

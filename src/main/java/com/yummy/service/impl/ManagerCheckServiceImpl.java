@@ -5,7 +5,7 @@ import com.yummy.dao.SignUpToCheckDao;
 import com.yummy.entity.Restaurant;
 import com.yummy.entity.SignUpToCheck;
 import com.yummy.module.SignUpToCheckModule;
-import com.yummy.service.ManagerService.ManagerCheckService;
+import com.yummy.service.managerservice.ManagerCheckService;
 import com.yummy.util.EmailSender;
 import com.yummy.util.message.datamessage.UpdateDataMessage;
 import com.yummy.util.message.servicemessage.ModifyMessage;
@@ -77,6 +77,7 @@ public class ManagerCheckServiceImpl implements ManagerCheckService {
         restaurant.setName(signUpToCheck.getName());
         restaurant.setType(signUpToCheck.getType());
         UpdateDataMessage updateDataMessage=restaurantDao.save(restaurant);
+        signUpToCheckDao.delete(signUpToCheck);
         if(updateDataMessage.equals(UpdateDataMessage.UPDATE_SUCCESS)){
             signUpToCheckDao.delete(signUpToCheck);
             return ModifyMessage.MODIFY_SUCCESS;

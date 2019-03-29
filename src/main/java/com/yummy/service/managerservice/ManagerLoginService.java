@@ -1,4 +1,4 @@
-package com.yummy.service.ManagerService;
+package com.yummy.service.managerservice;
 /*
  * author: SJZ
  * date: 2019/2/17

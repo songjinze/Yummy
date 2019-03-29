@@ -8,7 +8,7 @@ import com.yummy.entity.Order;
 import com.yummy.entity.Restaurant;
 import com.yummy.module.responsemodule.restaurantResponse.RestaurantFinishedOrderModule;
 import com.yummy.module.responsemodule.restaurantResponse.RestaurantOrderModule;
-import com.yummy.service.RestaurantService.RestaurantOrderService;
+import com.yummy.service.restaurantservice.RestaurantOrderService;
 import com.yummy.util.message.datamessage.UpdateDataMessage;
 import com.yummy.util.message.servicemessage.DeleteMessage;
 import com.yummy.util.message.servicemessage.ModifyMessage;

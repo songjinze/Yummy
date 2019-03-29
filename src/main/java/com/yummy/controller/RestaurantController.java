@@ -10,16 +10,16 @@ import com.yummy.module.RestaurantModule;
 import com.yummy.module.responsemodule.DiscountResponseModule;
 import com.yummy.module.responsemodule.Response;
 import com.yummy.module.responsemodule.restaurantResponse.*;
-import com.yummy.service.RestaurantService.RestaurantInfoService;
-import com.yummy.service.RestaurantService.RestaurantLoginService;
-import com.yummy.service.RestaurantService.RestaurantOrderService;
-import com.yummy.service.RestaurantService.RestaurantProductService;
+import com.yummy.service.restaurantservice.RestaurantInfoService;
+import com.yummy.service.restaurantservice.RestaurantLoginService;
+import com.yummy.service.restaurantservice.RestaurantOrderService;
+import com.yummy.service.restaurantservice.RestaurantProductService;
+import com.yummy.util.MyOwnDate;
 import com.yummy.util.message.servicemessage.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -32,15 +32,17 @@ public class RestaurantController {
     private final RestaurantProductService restaurantProductService;
     private final RestaurantInfoService restaurantInfoService;
     private final RestaurantOrderService restaurantOrderService;
+    private final MyOwnDate myOwnDate;
     @Autowired
     public RestaurantController(RestaurantLoginService restaurantLoginService,
                                 RestaurantProductService restaurantProductService,
                                 RestaurantInfoService restaurantInfoService,
-                                RestaurantOrderService restaurantOrderService) {
+                                RestaurantOrderService restaurantOrderService, MyOwnDate myOwnDate) {
         this.restaurantLoginService = restaurantLoginService;
         this.restaurantProductService=restaurantProductService;
         this.restaurantInfoService=restaurantInfoService;
         this.restaurantOrderService=restaurantOrderService;
+        this.myOwnDate = myOwnDate;
     }
 
     private final String USERNAME="username";
@@ -136,7 +138,7 @@ public class RestaurantController {
     public Response createDiscount(@RequestBody Map map){
         String restaurantIdCode=(String) map.get(ID);
         String date=(String) map.get("date");
-        int discount=((Double)map.get("discount")).intValue();
+        int discount= (int) Double.parseDouble((String)map.get("discount"));
         Response response=new Response();
         DiscountModule discountModule=new DiscountModule(restaurantIdCode,date,discount);
         ProductUpdateMessage productUpdateMessage=restaurantProductService.createDiscount(discountModule);
@@ -155,6 +157,8 @@ public class RestaurantController {
         DiscountModule discountModule=restaurantProductService.getDiscount(restaurantIdCode);
         if(discountModule==null){
             return null;
+        }else if(myOwnDate.compareTo(myOwnDate.getDate(),discountModule.getLimitTime())>-1){
+            return new DiscountResponseModule(null,100);
         }
         return new DiscountResponseModule(discountModule.getLimitTime(),discountModule.getDiscount());
     }

@@ -4,11 +4,12 @@ package com.yummy.controller;
  * date: 2019/3/18
  */
 
-import com.yummy.entity.SignUpToCheck;
+import com.yummy.module.ManagerStatisticModule;
 import com.yummy.module.SignUpToCheckModule;
 import com.yummy.module.responsemodule.Response;
-import com.yummy.service.ManagerService.ManagerCheckService;
-import com.yummy.service.ManagerService.ManagerLoginService;
+import com.yummy.service.managerservice.ManagerCheckService;
+import com.yummy.service.managerservice.ManagerLoginService;
+import com.yummy.service.managerservice.ManagerStatisticService;
 import com.yummy.util.message.servicemessage.LoginMessage;
 import com.yummy.util.message.servicemessage.ModifyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,12 @@ public class ManagerController {
 
     private final ManagerLoginService managerLoginService;
     private final ManagerCheckService managerCheckService;
-
+    private final ManagerStatisticService managerStatisticService;
     @Autowired
-    public ManagerController(ManagerLoginService managerLoginService, ManagerCheckService managerCheckService) {
+    public ManagerController(ManagerLoginService managerLoginService, ManagerCheckService managerCheckService, ManagerStatisticService managerStatisticService) {
         this.managerLoginService = managerLoginService;
         this.managerCheckService = managerCheckService;
+        this.managerStatisticService = managerStatisticService;
     }
 
     @PostMapping("login")
@@ -74,4 +76,11 @@ public class ManagerController {
         }
         return response;
     }
+
+    @PostMapping("getStatisticInfo")
+    @ResponseBody
+    public ManagerStatisticModule managerStatisticModule(@RequestBody Map map){
+        return managerStatisticService.getManagerStatisticModule();
+    }
+
 }

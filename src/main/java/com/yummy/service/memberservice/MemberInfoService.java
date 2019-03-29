@@ -1,4 +1,4 @@
-package com.yummy.service.MemberService;
+package com.yummy.service.memberservice;
 /*
  * author: SJZ
  * date: 2019/2/17

@@ -1,4 +1,4 @@
-package com.yummy.service.RestaurantService;
+package com.yummy.service.restaurantservice;
 /*
  * author: SJZ
  * date: 2019/3/22

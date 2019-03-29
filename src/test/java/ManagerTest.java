@@ -1,5 +1,5 @@
 import com.yummy.MainClass;
-import com.yummy.service.ManagerService.ManagerLoginService;
+import com.yummy.service.managerservice.ManagerLoginService;
 import com.yummy.util.message.servicemessage.LoginMessage;
 import org.junit.Assert;
 import org.junit.Test;

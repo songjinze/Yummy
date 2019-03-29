@@ -18,11 +18,11 @@ public class FinishedOrder {
 
     private double totalPrice;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="restaurantId")
     private Restaurant restaurant;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="memberId")
     private Member member;
 

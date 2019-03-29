@@ -1,24 +1,31 @@
 package com.yummy.controller;
 
+import com.yummy.module.DiscountModule;
 import com.yummy.module.MemberModule;
 import com.yummy.module.ProductModule;
 import com.yummy.module.requestmodule.MemberInfoModule;
 import com.yummy.module.requestmodule.MemberLoginModule;
 import com.yummy.module.requestmodule.MemberRestaurantListModule;
-import com.yummy.module.responsemodule.*;
+import com.yummy.module.responsemodule.Response;
 import com.yummy.module.responsemodule.memberResponse.*;
-import com.yummy.service.MemberService.MemberInfoService;
-import com.yummy.service.MemberService.MemberLoginService;
-import com.yummy.service.MemberService.MemberOrderService;
+import com.yummy.service.memberservice.MemberInfoService;
+import com.yummy.service.memberservice.MemberLoginService;
+import com.yummy.service.memberservice.MemberOrderService;
 import com.yummy.util.MemberCheckCodeContainer;
 import com.yummy.util.message.servicemessage.LoginMessage;
+import com.yummy.util.message.servicemessage.MemberOrderMessage;
 import com.yummy.util.message.servicemessage.ModifyMessage;
 import com.yummy.util.message.servicemessage.SignupMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /*
  * author: 73460
@@ -33,7 +40,7 @@ public class MemberController {
     private final MemberCheckCodeContainer memberCheckCodeContainer;
 
     @Autowired
-    public MemberController(MemberCheckCodeContainer memberCheckCodeContainer,MemberLoginService memberLoginService, MemberInfoService memberInfoService,MemberOrderService memberOrderService) {
+    public MemberController(MemberCheckCodeContainer memberCheckCodeContainer, MemberLoginService memberLoginService, MemberInfoService memberInfoService, MemberOrderService memberOrderService) {
         this.memberLoginService = memberLoginService;
         this.memberInfoService = memberInfoService;
         this.memberOrderService=memberOrderService;
@@ -133,10 +140,12 @@ public class MemberController {
         List<RestaurantProducts> res=new ArrayList<>();
         for(ProductModule productModule:productModules){
             RestaurantProducts restaurantProducts=new RestaurantProducts();
+            restaurantProducts.setpId(productModule.getId());
             restaurantProducts.setDate(productModule.getLimitTime());
             restaurantProducts.setLeftNum(productModule.getLeftNum()+"");
             restaurantProducts.setProductDescription(productModule.getDescrip());
             restaurantProducts.setProductName(productModule.getName());
+            restaurantProducts.setProductPrice(productModule.getPrice());
             res.add(restaurantProducts);
         }
         return res;
@@ -177,5 +186,76 @@ public class MemberController {
         return memberSignUpResultModule;
     }
 
+    @PostMapping("/member-getRestaurantDiscount")
+    @ResponseBody
+    public DiscountModule getRestaurantDiscount(@RequestBody Map map){
+        String restaurantName=(String)map.get("restaurantName");
+        String restaurantAddress=(String)map.get("restaurantAddress");
+        DiscountModule discountModule=memberOrderService.getRestaurantDiscount(restaurantName,restaurantAddress);
+        if(discountModule==null){
+            return new DiscountModule("","",100);
+        }else{
+            return discountModule;
+        }
+    }
 
+    @PostMapping("/member-createOrder")
+    @ResponseBody
+    @SuppressWarnings("all")
+    public Response createOrder(@RequestBody Map map){
+        String restaurantName=(String)map.get("restaurantName");
+        int userVId=Integer.parseInt((String)map.get("userVId"));
+        String date=(String)map.get("date");
+        String isPaid=(String)map.get("isPaid");
+        double totalPrice=(double)map.get("totalPrice");
+        String restaurantAddress=(String)map.get("restaurantAddress");
+        String memberAddress=(String)map.get("memberAddress");
+        List<LinkedHashMap<String,Integer>>productAndNumModules= (List<LinkedHashMap<String, Integer>>) map.get("orderProducts");
+        MemberOrderModule memberOrderModule=new MemberOrderModule(
+                userVId,
+                date,
+                restaurantName,
+                isPaid,
+                totalPrice
+        );
+        memberOrderModule.setMemberAddress(memberAddress);
+        memberOrderModule.setRestaurantAddress(restaurantAddress);
+        MemberOrderMessage memberOrderMessage=memberOrderService.createOrder(memberOrderModule,productAndNumModules);
+        Response response=new Response();
+        if(memberOrderMessage.equals(MemberOrderMessage.ORDER_SUCCESS)){
+            response.setResult("success");
+        }else{
+            response.setResult("fail");
+        }
+        return response;
+    }
+
+    @PostMapping("/member-payOrder")
+    @ResponseBody
+    public Response payOrder(@RequestBody Map map){
+        int orderId= (int) map.get("orderId");
+        MemberOrderModule memberOrderModule=memberOrderService.getMemberOrder(orderId);
+        MemberOrderMessage memberOrderMessage=memberOrderService.payOrder(memberOrderModule);
+        Response response=new Response();
+        if(memberOrderMessage.equals(MemberOrderMessage.ORDER_SUCCESS)){
+            response.setResult("success");
+        }else{
+            response.setResult("fail");
+        }
+        return response;
+    }
+
+    @PostMapping("/member-cancelOrder")
+    @ResponseBody
+    public Response cancelOrder(@RequestBody Map map){
+        int orderId=(int)map.get("orderId");
+        MemberOrderMessage memberOrderMessage=memberOrderService.cancelOrder(orderId);
+        Response response=new Response();
+        if(memberOrderMessage.equals(MemberOrderMessage.ORDER_SUCCESS)){
+            response.setResult("success");
+        }else{
+            response.setResult("fail");
+        }
+        return response;
+    }
 }

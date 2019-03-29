@@ -3,6 +3,7 @@ package com.yummy.entity;
 import javax.persistence.*;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.REFRESH;
 
 /*
  * author: SJZ
@@ -24,11 +25,11 @@ public class Order {
     @Column(name="totalPrice")
     private double totalPrice;
 
-    @ManyToOne(cascade = ALL)
+    @ManyToOne(cascade = REFRESH)
     @JoinColumn(name="memberId")
     private Member member;
 
-    @ManyToOne(cascade = ALL)
+    @ManyToOne(cascade = REFRESH)
     @JoinColumn(name="restaurantId")
     private Restaurant restaurant;
 

@@ -12,6 +12,11 @@ public class DiscountModule {
     public DiscountModule(){
     }
 
+    public DiscountModule(String limitTime, int discount) {
+        LimitTime = limitTime;
+        this.discount = discount;
+    }
+
     public DiscountModule(String restaurantIdCode, String limitTime, int discount) {
         this.restaurantIdCode = restaurantIdCode;
         LimitTime = limitTime;
